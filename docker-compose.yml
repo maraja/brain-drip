@@ -1,0 +1,29 @@
+version: "3"
+services:
+    api-gateway:
+        build: "./api-gateway"
+        depends_on:
+            - braindrip-backend
+        ports:
+            - 7000:7000
+        volumes:
+            - ./api-gateway:/opt/app
+
+    braindrip-backend:
+        build: "./braindrip-backend"
+        depends_on:
+            - braindrip-backend-db
+        environment:
+            - DB_URI=mysql://root:password@braindrip-backend-db/db?charset=UTF8
+        ports:
+            - 7101:7101
+        volumes:
+            - ./braindrip-backend:/opt/app
+    
+    braindrip-backend-db:
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=db
+        image: mysql:5.7.20
+        ports:
+            - 0.0.0.0:7201:3306

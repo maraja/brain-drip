@@ -1,0 +1,45 @@
+userById:
+    get:
+        description: |
+            Returns user by ID
+        operationId: getUserById
+        parameters:
+            -   name: id
+                in: path
+                description: id of user to return
+                required: true
+                schema:
+                    type: string
+        responses:
+            '200':
+                description: users response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/User'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        User:
+            required:
+                - id
+                - email
+                - password
+            properties:
+                id:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                    format: password
+                # type:
+                # 	$ref: '#/components/schemas/PetType'
