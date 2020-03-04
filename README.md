@@ -5,7 +5,6 @@ TODO:
 backend:
 
 - jwt routes
-- change routes to controllers
 - upvote api call
 - downvote api call
 - delete api calls

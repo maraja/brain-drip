@@ -19,43 +19,34 @@ const apiSpec = path.join(__dirname, '..', 'spec', 'openapi.yml');
 const app = express();
 
 // 1. Install bodyParsers for the request types your API will support
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 
+app.use(passport.initialize());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/spec', express.static(apiSpec));
 
-app.use(
-    cors({
-        origin: (origin, cb) => cb(null, true),
-        credentials: true
-    })
-);
+app.use(cors({
+    origin: (origin, cb) => cb(null, true),
+    credentials: true
+}));
 
 new OpenApiValidator({
-    apiSpec,
-    validateResponses: false, // default false
-})
-.install(app)
-.then(() => {
+    apiSpec, validateResponses: false, // default false
+}).install(app).then(() => {
     setupRoutes(app);
-    app.use(passport.initialize());
     setupPassport(passport);
-    
+
     app.use((err, req, res, next) => {
         console.log(err)
         let statusCode = err.status || 500;
-        return res.status(statusCode).json({
-            message: err.message
-        })
+        return res.status(statusCode).json({message: err.message})
     });
-    
+
     app.listen(PORT, "0.0.0.0", () => {
         console.info(`BrainDrip Backend listening on ${PORT}`);
     });
 })
-
-

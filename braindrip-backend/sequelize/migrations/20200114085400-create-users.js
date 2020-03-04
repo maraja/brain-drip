@@ -12,18 +12,18 @@ module.exports.up = (queryInterface, DataTypes) => {
         },
         firstName: {
             allowNull: false,
-            type: DataTypes.STRING,
+            type: DataTypes.STRING
         },
         lastName: {
             allowNull: false,
-            type: DataTypes.STRING,
+            type: DataTypes.STRING
         },
         profilePicture: {
             allowNull: true,
-            type: DataTypes.STRING,
+            type: DataTypes.STRING
         },
         passwordHash: {
-            allowNull: false,
+            allowNull: true,
             type: DataTypes.CHAR(64)
         },
         createdAt: {

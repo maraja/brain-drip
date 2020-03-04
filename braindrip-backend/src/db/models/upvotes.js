@@ -2,7 +2,7 @@
 
 
 module.exports = (sequelize, DataTypes) => {
-    var Favorites = sequelize.define('Favorites', {
+    var Upvotes = sequelize.define('Upvotes', {
         id: {
             allowNull: false,
             primaryKey: true,
@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.UUID
         }
-    }, {tableName: "favorites"});
+    }, {tableName: "upvotes"});
 
-    Favorites.associate = function (models) {
+    Upvotes.associate = function (models) {
         this.belongsTo(models.LearningPath, {
             foreignKey: 'learningPathId',
             as: 'learningPath'
@@ -29,5 +29,5 @@ module.exports = (sequelize, DataTypes) => {
         });
     };
 
-    return Favorites;
+    return Upvotes;
 };
