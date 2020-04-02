@@ -1,18 +1,20 @@
 import "@babel/polyfill";
 
 import React from "react";
-import { ApolloProvider } from 'react-apollo';
-import { render } from "react-dom";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import {ApolloProvider} from 'react-apollo';
+import {render} from "react-dom";
+import {createGlobalStyle, ThemeProvider} from "styled-components";
 
 import graphqlClient from "#root/api/graphqlClient";
 import Root from "#root/components/Root";
 
-import { BrowserRouter } from 'react-router-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 import * as theme from "./theme";
 
-const GlobalStyle = createGlobalStyle`
+import "#root/assets/_styles.scss"
+
+const GlobalStyle = createGlobalStyle `
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
     html, body, #app {
@@ -27,13 +29,11 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
-render(
-    <ApolloProvider client={graphqlClient} >
-        <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <BrowserRouter>
-                <Root />
-            </BrowserRouter>, 
-        </ThemeProvider>
-    </ApolloProvider>, 
-    document.getElementById("app"))
+render (<ApolloProvider client={graphqlClient}>
+    <ThemeProvider theme={theme}>
+        <GlobalStyle/>
+        <BrowserRouter>
+            <Root/>
+        </BrowserRouter>,
+    </ThemeProvider>
+</ApolloProvider>, document.getElementById("app"))

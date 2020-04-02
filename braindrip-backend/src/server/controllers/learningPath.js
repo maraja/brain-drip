@@ -23,6 +23,14 @@ const createLearningPath = async (req, res, next) => {
     }
 }
 
+
+(async () => {
+    await LearningPath.create({
+        
+    })
+})()
+
+
 const updatelearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
