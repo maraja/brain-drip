@@ -24,11 +24,11 @@ const createLearningPath = async (req, res, next) => {
 }
 
 
-(async () => {
-    await LearningPath.create({
+// (async () => {
+//     await LearningPath.create({
         
-    })
-})()
+//     })
+// })()
 
 
 const updatelearningPath = async (req, res, next) => {
