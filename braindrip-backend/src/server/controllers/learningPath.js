@@ -6,7 +6,6 @@ const createLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
     const { name, description, tags, difficulty, userId } = req.body;
-
     try {
         const newLearningPath = await LearningPath.create({
             id: generateUUID(),
@@ -15,8 +14,9 @@ const createLearningPath = async (req, res, next) => {
             name, description, tags, difficulty, userId
         })
         return res.json({
+            success: true,
             message: "Learning Path Successfully created.",
-            learningPath: newLearningPath
+            newLearningPath
         });
     } catch(e) {
         return next(e);

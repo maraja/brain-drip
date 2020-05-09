@@ -14,6 +14,7 @@ const createLearningPathResource = async (req, res, next) => {
             learningPathId, url, topic, description, type
         })
         return res.json({
+            success: true,
             message: "Learning Path Resource Successfully created.",
             learningPathResource
         });
@@ -25,17 +26,18 @@ const createLearningPathResource = async (req, res, next) => {
 const updateLearningPathResource = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
-    const { learningPathResourceId, learningPathId, url, topic, description, sequenceNumber, type } = req.body;
+    const { id, learningPathId, url, topic, description, sequenceNumber, type } = req.body;
 
     try {
         const learningPathResource = await LearningPathResource.update({
             sequenceNumber, learningPathId, url, topic, description, type
         }, { 
-            where: { id: learningPathResourceId },
+            where: { id: id },
             returning: true,
             plain: true
         })
         return res.json({
+            success: true,
             message: `Learning Path Resource Successfully updated.`
         });
     } catch(e) {

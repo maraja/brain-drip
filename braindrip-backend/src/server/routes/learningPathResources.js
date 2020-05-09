@@ -3,7 +3,7 @@ let router = express.Router();
 
 import learningPathResourceController from "#root/server/controllers/learningPathResource";
 
-const { 
+const {
     createLearningPathResource,
     updateLearningPathResource } = learningPathResourceController
 

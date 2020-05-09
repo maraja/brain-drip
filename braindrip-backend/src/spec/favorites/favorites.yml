@@ -1,0 +1,71 @@
+favorites:
+    post:
+        description: |
+            creates a new favorite
+        operationId: createFavorite
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: favorite to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/Favorite'
+
+        responses:
+            '200':
+                description: favorite response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Favorite'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+    delete:
+        description: |
+            deletes a favorite
+        operationId: deleteFavorite
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: favorite to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/Favorite'
+
+        responses:
+            '200':
+                description: favorite response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Favorite'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        Favorite:
+            required:
+                - learningPathId
+                - userId
+            properties:
+                id:
+                    type: string
+                learningPathId:
+                    type: string
+                    description: Learning path id.
+                userId:
+                    type: string
+                    description: User id

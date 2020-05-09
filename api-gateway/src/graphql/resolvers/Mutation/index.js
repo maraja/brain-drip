@@ -1,3 +1,14 @@
 export { default as createUser } from "./createUser";
 export { default as createLearningPath } from "./createLearningPath";
+export { default as createLearningBucket } from "./createLearningBucket";
+export { default as addDownvote } from "./addDownvote";
+export { default as addUpvote } from "./addUpvote";
+export { default as addFavorite } from "./addFavorite";
+export { default as removeDownvote } from "./removeDownvote";
+export { default as removeUpvote } from "./removeUpvote";
+export { default as removeFavorite } from "./removeFavorite";
+export { default as createLearningPathResource } from "./createLearningPathResource";
+export { default as updateLearningPathResource } from "./updateLearningPathResource";
+export { default as createLearningBucketResource } from "./createLearningBucketResource";
+export { default as updateLearningBucketResource } from "./updateLearningBucketResource";
 // export { default as createUserSession } from "./createUserSession";

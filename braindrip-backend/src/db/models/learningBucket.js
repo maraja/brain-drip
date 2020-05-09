@@ -18,18 +18,19 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.STRING
     },
+    userId: {
+      allowNull: false,
+      type: DataTypes.UUID
+    }
   }, {
     tableName: "learningBuckets"
 });
 
   LearningBuckets.associate = function(models) {
     this.hasMany(models.LearningBucketResource, { as: 'learningBucketResources' });
-  };
-
-  LearningBuckets.associate = function(models) {
     this.belongsTo(models.User, {
         foreignKey: 'id',
-        as: 'userId'
+        as: 'user'
     });
   };
 

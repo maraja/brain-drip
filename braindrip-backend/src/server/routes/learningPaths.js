@@ -3,11 +3,11 @@ let router = express.Router();
 
 import learningPathController from "#root/server/controllers/learningPath";
 
-const { 
-    getLearningPathById, 
-    createLearningPath, 
-    updatelearningPath, 
-    searchLearningPathsByParams, 
+const {
+    getLearningPathById,
+    createLearningPath,
+    updatelearningPath,
+    searchLearningPathsByParams,
     searchLearningPathsByString } = learningPathController
 
 router.post("/", createLearningPath)

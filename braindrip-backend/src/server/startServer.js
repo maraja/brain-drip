@@ -35,7 +35,7 @@ app.use(cors({
 }));
 
 new OpenApiValidator({
-    apiSpec, validateResponses: false, // default false
+    apiSpec, validateResponses: false, validateRequests: false, // default false
 }).install(app).then(() => {
     setupRoutes(app);
     setupPassport(passport);
@@ -49,4 +49,7 @@ new OpenApiValidator({
     app.listen(PORT, "0.0.0.0", () => {
         console.info(`BrainDrip Backend listening on ${PORT}`);
     });
-})
+}).catch(error =>{ 
+    console.debug(error);
+}
+)

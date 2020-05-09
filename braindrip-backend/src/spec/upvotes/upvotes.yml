@@ -1,0 +1,71 @@
+upvotes:
+    post:
+        description: |
+            creates a new upvote
+        operationId: createUpvote
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: upvote to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/Upvote'
+
+        responses:
+            '200':
+                description: upvote response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Upvote'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+    delete:
+        description: |
+            deletes a upvote
+        operationId: deleteUpvote
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: upvote to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/Upvote'
+
+        responses:
+            '200':
+                description: upvote response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Upvote'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        Upvote:
+            required:
+                - learningPathId
+                - userId
+            properties:
+                id:
+                    type: string
+                learningPathId:
+                    type: string
+                    description: Learning path id.
+                userId:
+                    type: string
+                    description: User id
