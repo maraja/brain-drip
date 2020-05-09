@@ -36,19 +36,44 @@ export default class BrainDripService {
         return body;
     }
 
+    static async updateLearningPath({ id, name, description, tags, difficulty, userId }) {
+        const body = await got.put(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
+            json: { id, name, description, tags, difficulty, userId }
+        }).json();
+        return body;
+    }
+
+    static async deleteLearningPath({ id, userId }) {
+        const body = await got.delete(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
+            json: { id, userId }
+        }).json();
+        return body;
+    }
+
     // LEARNING PATH RESOURCES
+
+    static async fetchLearningPathResource({ id }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/resource/id/${id}`).json();
+        return body.learningPathResource;
+    }
 
     static async createLearningPathResource({ learningPathId, url, topic, description, type, sequenceNumber }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-path/resource`, {
             json: { learningPathId, url, topic, description, type, sequenceNumber }
         }).json();
-        console.debug(body);
         return body;
     }
 
     static async updateLearningPathResource({ id, learningPathId, url, topic, description, type, sequenceNumber }) {
         const body = await got.put(`${BRAINDRIP_BACKEND_URI}/learning-path/resource`, {
             json: { id, learningPathId, url, topic, description, type, sequenceNumber }
+        }).json();
+        return body;
+    }
+
+    static async deleteLearningPathResource({ id }) {
+        const body = await got.delete(`${BRAINDRIP_BACKEND_URI}/learning-path/resource`, {
+            json: { id }
         }).json();
         return body;
     }
@@ -66,11 +91,30 @@ export default class BrainDripService {
         return body;
     }
 
+    static async updateLearningBucket({ id, name, description, tags, userId }) {
+        const body = await got.put(`${BRAINDRIP_BACKEND_URI}/learning-bucket`, {
+            json: { id, name, description, tags, userId}
+        }).json();
+        return body;
+    }
+
+    static async deleteLearningBucket({ id, userId }) {
+        const body = await got.delete(`${BRAINDRIP_BACKEND_URI}/learning-bucket`, {
+            json: { id, userId }
+        }).json();
+        return body;
+    }
+
     // LEARNING BUCKET RESOURCES
+
+    static async fetchLearningBucketResource({ id }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-bucket/resource/id/${id}`).json();
+        return body.learningBucketResource;
+    }
 
     static async createLearningBucketResource({ learningBucketId, url, topic, description }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-bucket/resource`, {
-            json: { learningBucketId, url, topic, description}
+            json: { learningBucketId, url, topic, description }
         }).json();
         return body;
     }
@@ -80,6 +124,13 @@ export default class BrainDripService {
             json: { id, learningBucketId, url, topic, description }
         }).json();
         console.debug(body);
+        return body;
+    }
+
+    static async deleteLearningBucketResource({ id }) {
+        const body = await got.delete(`${BRAINDRIP_BACKEND_URI}/learning-bucket/resource`, {
+            json: { id }
+        }).json();
         return body;
     }
 

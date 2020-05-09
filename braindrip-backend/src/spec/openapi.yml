@@ -47,6 +47,10 @@ paths:
     $ref: './favorites/favorites.yml#/favorites'
   /upvotes:
     $ref: './upvotes/upvotes.yml#/upvotes'
+  /learning-path/resource/id/{id}:
+    $ref: './learningpathresource/learningpathresourcebyid.yml#/learningPathResourceById'
+  /learning-bucket/resource/id/{id}:
+    $ref: './learningbucketresource/learningbucketresourcebyid.yml#/learningBucketResourceById'
 
 components:
   schemas:

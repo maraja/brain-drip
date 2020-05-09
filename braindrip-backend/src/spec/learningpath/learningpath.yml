@@ -74,6 +74,34 @@ learningPath:
                     application/json:
                         schema:
                             $ref: '../openapi.yml#/components/schemas/Error'
+    
+    delete:
+        description: |
+            deletes a learning path
+        operationId: deleteLearningPath
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning path to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/DeleteLearningPath'
+
+        responses:
+            '200':
+                description: learning path deleted
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteLearningPath'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
 
 components:
     schemas:
@@ -121,7 +149,6 @@ components:
                 - difficulty
                 - upVotes
                 - downVotes
-                - userId
             properties:
                 learningPathId:
                     type: string
@@ -151,3 +178,16 @@ components:
                     description: array of learning paths.
                 # type:
                 # 	$ref: '#/components/schemas/PetType'
+        DeleteLearningPath:
+            required:
+                - learningPathId
+                - userId
+            properties:
+                id:
+                    type: string
+                learningPathId:
+                    type: string
+                    description: Learning path id.
+                userId:
+                    type: string
+                    description: User id

@@ -1,0 +1,54 @@
+learningBucketResourceById:
+    get:
+        description: |
+            Get learning bucket resource by id
+        operationId: getLearningBucketResourceById
+        parameters:
+            -   name: id
+                in: path
+                description: id of learning bucket resource to return
+                required: true
+                schema:
+                    type: string
+        responses:
+            '200':
+                description: learning bucket response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/LearningBucketResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningBucketResource:
+            required:
+                - id
+                - learningBucketId
+                - url
+                - topic
+                - description
+            properties:
+                id:
+                    type: string
+                learningBucketId:
+                    type: string
+                    description: id of this learning bucket.
+                url:
+                    type: string
+                    description: url for this resource
+                topic:
+                    type: string
+                    description: topic describing this resource
+                description:
+                    type: string
+                    description: description for this resource
+                # type:
+                # 	$ref: '#/components/schemas/PetType'

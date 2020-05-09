@@ -5,10 +5,17 @@ import learningBucketResourceController from "#root/server/controllers/learningB
 
 const {
     createLearningBucketResource,
-    updateLearningBucketResource } = learningBucketResourceController
+    updateLearningBucketResource,
+    getLearningBucketResourceById,
+    deleteLearningBucketResource
+ } = learningBucketResourceController
 
 router.post("/", createLearningBucketResource)
 
 router.put("/", updateLearningBucketResource)
+
+router.delete("/", deleteLearningBucketResource)
+
+router.get("/id/:learningBucketResourceId", getLearningBucketResourceById)
 
 export default router;

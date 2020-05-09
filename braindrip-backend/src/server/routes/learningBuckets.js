@@ -5,9 +5,16 @@ import learningBucketController from "#root/server/controllers/learningBucket";
 
 const {
     getLearningBucketById,
-    createLearningBucket } = learningBucketController
+    createLearningBucket,
+    updateLearningBucket,
+    deleteLearningBucket,
+ } = learningBucketController
 
 router.post("/", createLearningBucket)
+
+router.put("/", updateLearningBucket)
+
+router.delete("/", deleteLearningBucket)
 
 router.get("/id/:learningBucketId", getLearningBucketById)
 

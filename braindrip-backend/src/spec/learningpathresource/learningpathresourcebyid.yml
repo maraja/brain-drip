@@ -1,0 +1,62 @@
+learningPathResourceById:
+    get:
+        description: |
+            Get learning path resource by id
+        operationId: getLearningPathResourceById
+        parameters:
+            -   name: id
+                in: path
+                description: id of learning path resource to return
+                required: true
+                schema:
+                    type: string
+        responses:
+            '200':
+                description: learning path resource response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/LearningPathResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningPathResource:
+            required:
+                # - id
+                - learningPathId
+                - url
+                - type
+                # - topic
+                # - description
+                # - sequenceNumber
+            properties:
+                id:
+                    type: string
+                learningPathId:
+                    type: string
+                    description: id of this resource.
+                url:
+                    type: string
+                    description: url for this resource
+                type:
+                    type: string
+                    description: type of resource
+                topic:
+                    type: string
+                    description: topic describing this resource
+                description:
+                    type: string
+                    description: description for this resource
+                sequenceNumber:
+                    type: number
+                    description: sequence number this resource falls within the learning path
+                # type:
+                # 	$ref: '#/components/schemas/PetType'

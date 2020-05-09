@@ -53,6 +53,33 @@ learningPathResource:
                     application/json:
                         schema:
                             $ref: '../openapi.yml#/components/schemas/Error'
+    delete:
+        description: |
+            deletes a learning path resource
+        operationId: deleteLearningPath
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning path resource to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/DeleteLearningPathResource'
+
+        responses:
+            '200':
+                description: learning path resource deleted
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteLearningPathResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
 
 components:
     schemas:
@@ -118,3 +145,9 @@ components:
                     description: sequence number this resource falls within the learning path
                 # type:
                 # 	$ref: '#/components/schemas/PetType'
+        DeleteLearningPathResource:
+            required:
+                - id
+            properties:
+                id:
+                    type: string

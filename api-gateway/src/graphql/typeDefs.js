@@ -82,6 +82,11 @@ const typeDefs = gql`
         favorites: [Favorite]
     }
 
+    type Response {
+        success: Boolean
+        message: String
+    }
+
     type UserCreateResponse {
         success: Boolean
         message: String
@@ -133,14 +138,22 @@ const typeDefs = gql`
     type Mutation {
         createUser(email: String!, password: String!, firstName: String!, lastName: String!): UserCreateResponse
 
-        createLearningPath(name: String!, description: String!, difficulty: String!, userId: String!): LearningPathCreateResponse
+        createLearningPath(name: String!, description: String!, difficulty: String!, tags: String!, userId: String!): LearningPathCreateResponse
+        updateLearningPath(id: String!, name: String, description: String, difficulty: String, tags: String, userId: String!): Response
+        deleteLearningPath(id: String!, userId: String!): Response
+
         createLearningPathResource(learningPathId: String!, url: String!, description: String!, topic: String!, type: String!, sequenceNumber: Int): LearningPathResourceResponse
         updateLearningPathResource(id: String!, learningPathId: String!, 
                                     url: String!, description: String!, topic: String!, type: String!, sequenceNumber: Int): LearningPathResourceResponse
+        deleteLearningPathResource(id: String!): Response
 
         createLearningBucket(name: String!, description: String!, tags: String!, userId: String!): LearningBucketCreateResponse
+        updateLearningBucket(id: String!, name: String, description: String, tags: String, userId: String!): Response
+        deleteLearningBucket(id: String!, userId: String!): Response
+
         createLearningBucketResource(learningBucketId: String!, url: String!, topic: String!, description: String!): LearningBucketResourceResponse
         updateLearningBucketResource(id: String!, learningBucketId: String!, url: String!, topic: String!, description: String!): LearningBucketResourceResponse
+        deleteLearningBucketResource(id: String!): Response
 
         addDownvote(learningPathId: String!, userId: String!): DownvoteResponse
         addUpvote(learningPathId: String!, userId: String!): UpvoteResponse        
@@ -160,7 +173,9 @@ const typeDefs = gql`
         user_list: [User]
         user(id: String!): User
         learningPath(id: String!): LearningPath
+        learningPathResource(id: String!): LearningPathResource
         learningBucket(id: String!): LearningBucket
+        learningBucketResource(id: String!): LearningBucketResource
     }
 `;
 

@@ -53,6 +53,33 @@ learningBucketResource:
                     application/json:
                         schema:
                             $ref: '../openapi.yml#/components/schemas/Error'
+    delete:
+        description: |
+            deletes a learning bucket resource
+        operationId: deleteLearningBucket
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning bucket resource to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/DeleteLearningBucketResource'
+
+        responses:
+            '200':
+                description: learning bucket resource deleted
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteLearningBucketResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
 
 components:
     schemas:
@@ -103,3 +130,9 @@ components:
                     description: description for this resource
                 # type:
                 # 	$ref: '#/components/schemas/PetType'
+        DeleteLearningBucketResource:
+            required:
+                - id
+            properties:
+                id:
+                    type: string

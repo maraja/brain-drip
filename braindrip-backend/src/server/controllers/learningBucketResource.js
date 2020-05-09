@@ -43,7 +43,52 @@ const updateLearningBucketResource = async (req, res, next) => {
     }
 }
 
+const getLearningBucketResourceById = async (req, res, next) => {
+    try {
+        const learningBucketResource = await LearningBucketResource.findByPk(req.params.learningBucketResourceId, {
+            subQuery: false,
+            include: [
+                {
+                    model: LearningBucket,
+                    as: 'learningBucket'
+                },
+            ],  
+            nest: true,
+        });
+
+        if (!learningBucketResource) return next(new Error("Invalid learning bucket resource ID"))
+        
+        return res.json({
+            message: "Successfully retrieved learning bucket resource.",
+            learningBucketResource
+        });
+    } catch (e) {
+        return next(e);
+    }
+}
+
+const deleteLearningBucketResource = async (req, res, next) => {
+    if (!req.body) return next(new Error("Invalid body!"));
+
+    const { id } = req.body;
+
+    try {
+        const learningPath = await LearningBucketResource.destroy( { 
+            where: { id: id },
+        })
+        return res.json({
+            success: true,
+            message: `Learning Bucket Resource Successfully deleted.`
+        });
+    } catch(e) {
+        return next(e);
+    }
+}
+
 export default {
     createLearningBucketResource,
-    updateLearningBucketResource
+    updateLearningBucketResource,
+    getLearningBucketResourceById,
+    deleteLearningBucketResource
+
 }
