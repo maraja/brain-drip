@@ -35,6 +35,22 @@ paths:
     $ref: './auth/googlecallback.yml#/googleCallback'
   /auth/facebook/callback:
     $ref: './auth/facebookcallback.yml#/facebookCallback'
+  /learning-bucket:
+    $ref: './learningbucket/learningbucket.yml#/learningBucket'
+  /learning-bucket/id/{id}:
+    $ref: './learningbucket/learningbucketbyid.yml#/learningBucketById'
+  /learning-bucket/resource:
+    $ref: './learningbucketresource/learningbucketresource.yml#/learningBucketResource'
+  /downvotes:
+    $ref: './downvotes/downvotes.yml#/downvotes'
+  /favorites:
+    $ref: './favorites/favorites.yml#/favorites'
+  /upvotes:
+    $ref: './upvotes/upvotes.yml#/upvotes'
+  /learning-path/resource/id/{id}:
+    $ref: './learningpathresource/learningpathresourcebyid.yml#/learningPathResourceById'
+  /learning-bucket/resource/id/{id}:
+    $ref: './learningbucketresource/learningbucketresourcebyid.yml#/learningBucketResourceById'
 
 components:
   schemas:

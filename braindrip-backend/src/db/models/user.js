@@ -48,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.associate = function (models) {
         this.hasMany(models.LearningPath, {as: "learningPaths"});
+        this.hasMany(models.LearningBucket, {as: "learningBuckets"});
         this.hasMany(models.Favorites, {as: 'favorites'});
         this.hasMany(models.Upvotes, {as: 'upvotes'});
         this.hasMany(models.Downvotes, {as: 'downvotes'});

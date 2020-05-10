@@ -1,25 +1,25 @@
-learningPathResource:
+learningBucketResource:
     post:
         description: |
-            creates a new learning path resource
-        operationId: createLearningPathResource
+            creates a new learning bucket resource
+        operationId: createLearningBucketResource
         # security:
         #     - ApiKeyAuth: []
         requestBody:
-            description: learning path resource to add
+            description: learning bucket resource to add
             required: true
             content:
                 application/json:
                     schema: 
-                        $ref: '#/components/schemas/LearningPathResource'
+                        $ref: '#/components/schemas/LearningBucketResource'
 
         responses:
             '200':
-                description: learning path resource response
+                description: learning bucket resource response
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/LearningPathResource'
+                            $ref: '#/components/schemas/LearningBucketResource'
             default:
                 description: unexpected error
                 content:
@@ -28,25 +28,25 @@ learningPathResource:
                             $ref: '../openapi.yml#/components/schemas/Error'
     put:
         description: |
-            updates a learning path resource
-        operationId: updateLearningPathResource
+            updates a learning bucket resource
+        operationId: updateLearningBucketResource
         # security:
         #     - ApiKeyAuth: []
         requestBody:
-            description: learning path resource to update
+            description: learning bucket resource to update
             required: true
             content:
                 application/json:
                     schema: 
-                        $ref: '#/components/schemas/PutLearningPathResource'
+                        $ref: '#/components/schemas/PutLearningBucketResource'
 
         responses:
             '200':
-                description: learning path resource response
+                description: learning bucket resource response
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/LearningPathResource'
+                            $ref: '#/components/schemas/LearningBucketResource'
             default:
                 description: unexpected error
                 content:
@@ -55,25 +55,25 @@ learningPathResource:
                             $ref: '../openapi.yml#/components/schemas/Error'
     delete:
         description: |
-            deletes a learning path resource
-        operationId: deleteLearningPath
+            deletes a learning bucket resource
+        operationId: deleteLearningBucket
         # security:
         #     - ApiKeyAuth: []
         requestBody:
-            description: learning path resource to delete
+            description: learning bucket resource to delete
             required: true
             content:
                 application/json:
                     schema: 
-                        $ref: '#/components/schemas/DeleteLearningPathResource'
+                        $ref: '#/components/schemas/DeleteLearningBucketResource'
 
         responses:
             '200':
-                description: learning path resource deleted
+                description: learning bucket resource deleted
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/DeleteLearningPathResource'
+                            $ref: '#/components/schemas/DeleteLearningBucketResource'
             default:
                 description: unexpected error
                 content:
@@ -83,69 +83,54 @@ learningPathResource:
 
 components:
     schemas:
-        LearningPathResource:
+        LearningBucketResource:
             required:
                 # - id
-                - learningPathId
+                - learningBucketId
                 - url
-                - type
                 # - topic
                 # - description
                 # - sequenceNumber
             properties:
                 id:
                     type: string
-                learningPathId:
+                learningBucketId:
                     type: string
-                    description: name of this learning path.
+                    description: name of this learning bucket.
                 url:
                     type: string
                     description: url for this resource
-                type:
-                    type: string
-                    description: type of resource
                 topic:
                     type: string
                     description: topic describing this resource
                 description:
                     type: string
                     description: description for this resource
-                sequenceNumber:
-                    type: number
-                    description: sequence number this resource falls within the learning path
-        PutLearningPathResource:
+        PutLearningBucketResource:
             required:
-                - learningPathResourceId
-                - learningPathId
+                - learningBucketResourceId
+                - learningBucketId
                 - url
-                - type
                 # - topic
                 # - description
-                # - sequenceNumber
             properties:
-                learningPathResourceId:
+                learningBucketResourceId:
                     type: string
-                learningPathId:
+                learningBucketId:
                     type: string
-                    description: name of this learning path.
+                    description: name of this learning bucket.
                 url:
                     type: string
                     description: url for this resource
-                type:
-                    type: string
-                    description: type of resource
                 topic:
                     type: string
                     description: topic describing this resource
                 description:
                     type: string
                     description: description for this resource
-                sequenceNumber:
-                    type: number
-                    description: sequence number this resource falls within the learning path
                 # type:
                 # 	$ref: '#/components/schemas/PetType'
-        DeleteLearningPathResource:
+        DeleteLearningBucketResource:
             required:
                 - id
             properties:

@@ -3,16 +3,19 @@ let router = express.Router();
 
 import learningPathController from "#root/server/controllers/learningPath";
 
-const { 
-    getLearningPathById, 
-    createLearningPath, 
-    updatelearningPath, 
-    searchLearningPathsByParams, 
+const {
+    getLearningPathById,
+    createLearningPath,
+    updateLearningPath,
+    deleteLearningPath,
+    searchLearningPathsByParams,
     searchLearningPathsByString } = learningPathController
 
 router.post("/", createLearningPath)
 
-router.put("/", updatelearningPath)
+router.put("/", updateLearningPath)
+
+router.delete("/", deleteLearningPath)
 
 router.get("/id/:learningPathId", getLearningPathById)
 

@@ -6,10 +6,12 @@ const getAllUsers = async (req, res, next) => {
     // if (!req.body.email || !req.body.password) {
     //     return next(new Error("Invalid body!"));
     // }
-
     try {   
-        const users = await User.findAll()
-        return res.json(users);
+        const users = await User.findAll();
+        return res.json({
+            message:"Users succesfully retrieved!",
+            users
+        });
     } catch(e) {
         return next(e);
     }
@@ -28,6 +30,7 @@ const createUser = async (req, res, next) => {
         })
         return res.json({
             message:"New User succesfully created!",
+            success: true,
             newUser
         });
     } catch(e) {

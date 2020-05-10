@@ -6,7 +6,6 @@ const createLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
     const { name, description, tags, difficulty, userId } = req.body;
-
     try {
         const newLearningPath = await LearningPath.create({
             id: generateUUID(),
@@ -15,8 +14,9 @@ const createLearningPath = async (req, res, next) => {
             name, description, tags, difficulty, userId
         })
         return res.json({
+            success: true,
             message: "Learning Path Successfully created.",
-            learningPath: newLearningPath
+            newLearningPath
         });
     } catch(e) {
         return next(e);
@@ -31,21 +31,40 @@ const createLearningPath = async (req, res, next) => {
 // })()
 
 
-const updatelearningPath = async (req, res, next) => {
+const updateLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
-    const { learningPathId, name, description, tags, difficulty, upVotes, downVotes, userId } = req.body;
+    const { id, name, description, tags, difficulty, upVotes, downVotes, userId } = req.body;
 
     try {
         const learningPath = await LearningPath.update({
-            name, description, tags, difficulty, upVotes, downVotes, userId
+            name, description, tags, difficulty, upVotes, downVotes
         }, { 
-            where: { id: learningPathId },
+            where: { id: id, userId: userId },
             returning: true,
             plain: true
         })
         return res.json({
+            success: true,
             message: `Learning Path Successfully updated.`
+        });
+    } catch(e) {
+        return next(e);
+    }
+}
+
+const deleteLearningPath = async (req, res, next) => {
+    if (!req.body) return next(new Error("Invalid body!"));
+
+    const { id, userId } = req.body;
+
+    try {
+        const learningPath = await LearningPath.destroy( { 
+            where: { id: id, userId: userId },
+        })
+        return res.json({
+            success: true,
+            message: `Learning Path Successfully deleted.`
         });
     } catch(e) {
         return next(e);
@@ -152,7 +171,8 @@ const searchLearningPathsByString = async(req, res, next) => {
 export default {
     getLearningPathById, 
     createLearningPath, 
-    updatelearningPath, 
+    updateLearningPath, 
+    deleteLearningPath, 
     searchLearningPathsByParams, 
     searchLearningPathsByString
 };
