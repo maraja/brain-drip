@@ -5,6 +5,13 @@ import {Route, Switch} from 'react-router-dom';
 import Login from "./Login";
 import Home from './Home';
 
+// import 'antd/dist/antd.css'
+import './Root.less';
+
+import {
+    Button
+} from 'antd';
+
 const Container = styled.div `
     display: flex;
     flex-flow: row nowrap;
@@ -34,6 +41,9 @@ function About() {
         <Wrapper>
             <Container>
                 <h1>This is my about page.</h1>
+                <Button type="primary" htmlType="submit">
+                    确定
+                </Button>
             </Container>
         </Wrapper>
     )
