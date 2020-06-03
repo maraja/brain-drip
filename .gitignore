@@ -4,6 +4,8 @@ node_modules/
 
 dist/
 
+yarn.lock
+
 .cache/ 
 
 braindrip-backend/node_modules

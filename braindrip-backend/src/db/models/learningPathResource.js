@@ -2,11 +2,7 @@
 
 const typeEnum = ['Video', 'Article', 'Blog Post', 'Research Paper']
 
-<<<<<<< HEAD
 module.exports = function (sequelize, DataTypes) {
-=======
-module.exports = (sequelize, DataTypes) => {
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
   var LearningPathResource = sequelize.define('LearningPathResource', {
     id: {
         allowNull: false,
@@ -38,12 +34,8 @@ module.exports = (sequelize, DataTypes) => {
             args: [typeEnum],
             msg: `type must be within ${typeEnum}`
           }
-<<<<<<< HEAD
         },
         defaultValue: 'Article'
-=======
-        }
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
     },
     sequenceNumber: {
       type: DataTypes.INTEGER,

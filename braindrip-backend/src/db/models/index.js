@@ -31,10 +31,6 @@ const LearningResource = require("./learningResource");
 
 // // exported just in case, but can also be fetched via db.model('Album') etc.
 
-<<<<<<< HEAD
 export default {
-=======
-module.exports = {
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
   User, UserSession, LearningPath, LearningResource
 };

@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 import db from "#root/db";
 import generateUUID from "#root/helpers/generateUUID";
 import Sequelize, { Op } from 'sequelize';
 
 const { User, Favorites, LearningPath, LearningPathResource } = db;
 
-=======
-import { User, Favorites, LearningPath, LearningPathResource } from "#root/db";
-import generateUUID from "#root/helpers/generateUUID";
-import Sequelize, { Op } from 'sequelize';
-
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const createLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 

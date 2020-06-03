@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import db from "#root/db";
 import generateUUID from "#root/helpers/generateUUID";
 
 const { Upvotes, LearningPath } = db;
-=======
-import { Upvotes, LearningPath } from "#root/db";
-import generateUUID from "#root/helpers/generateUUID";
-
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
 const addUpvote = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));

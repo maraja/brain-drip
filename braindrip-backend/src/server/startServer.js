@@ -14,11 +14,7 @@ const PORT = accessEnv("PORT", 7101);
 
 var OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
 
-<<<<<<< HEAD
 const apiSpec = path.join(process.cwd(), 'src', 'spec', 'openapi.yml');
-=======
-const apiSpec = path.join(__dirname, '..', 'spec', 'openapi.yml');
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
 const app = express();
 
@@ -29,11 +25,7 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 
-<<<<<<< HEAD
 app.use(express.static(path.join(process.cwd(), 'src', 'public')));
-=======
-app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
 app.use('/spec', express.static(apiSpec));
 

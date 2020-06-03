@@ -1,20 +1,13 @@
 import { addHours } from 'date-fns';
 
-<<<<<<< HEAD
 import db from "#root/db";
-=======
-import db, { User, UserSession } from "#root/db";
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 import generateUUID from "#root/helpers/generateUUID";
 import passwordCompareSync from "#root/helpers/passwordCompareSync";
 
 import express from 'express';
 let router = express.Router();
 
-<<<<<<< HEAD
 const { User, UserSession } = db;
-=======
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const USER_SESSION_EXPIRY_HOURS = 1;
 
 router.post("/", async (req, res, next) => {

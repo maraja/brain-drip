@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import db from '#root/db';
 
 const { User, LearningPath, LearningPathResource, Favorites } = db;
-=======
-import db, { User, LearningPath, LearningPathResource, Favorites } from '#root/db';
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
 (async () => {
     try {
@@ -12,11 +8,7 @@ import db, { User, LearningPath, LearningPathResource, Favorites } from '#root/d
             // if we don't have subquery here, it will continue to 
             // recurse on the queries. Weird.
             subQuery: false,
-<<<<<<< HEAD
             limit: 3,
-=======
-            limit: 1,
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
             include: [
                 {
                     // all:true,

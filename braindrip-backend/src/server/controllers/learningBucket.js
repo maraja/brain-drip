@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import db from "#root/db";
 import generateUUID from "#root/helpers/generateUUID";
 
 const { User, LearningBucket, LearningBucketResource } = db;
 
-=======
-import { User, LearningBucket, LearningBucketResource } from "#root/db";
-import generateUUID from "#root/helpers/generateUUID";
-
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const createLearningBucket = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
