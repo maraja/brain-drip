@@ -1,0 +1,138 @@
+learningBucketResource:
+    post:
+        description: |
+            creates a new learning bucket resource
+        operationId: createLearningBucketResource
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning bucket resource to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/LearningBucketResource'
+
+        responses:
+            '200':
+                description: learning bucket resource response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LearningBucketResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+    put:
+        description: |
+            updates a learning bucket resource
+        operationId: updateLearningBucketResource
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning bucket resource to update
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/PutLearningBucketResource'
+
+        responses:
+            '200':
+                description: learning bucket resource response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LearningBucketResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+    delete:
+        description: |
+            deletes a learning bucket resource
+        operationId: deleteLearningBucket
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning bucket resource to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/DeleteLearningBucketResource'
+
+        responses:
+            '200':
+                description: learning bucket resource deleted
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteLearningBucketResource'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningBucketResource:
+            required:
+                # - id
+                - learningBucketId
+                - url
+                # - topic
+                # - description
+                # - sequenceNumber
+            properties:
+                id:
+                    type: string
+                learningBucketId:
+                    type: string
+                    description: name of this learning bucket.
+                url:
+                    type: string
+                    description: url for this resource
+                topic:
+                    type: string
+                    description: topic describing this resource
+                description:
+                    type: string
+                    description: description for this resource
+        PutLearningBucketResource:
+            required:
+                - learningBucketResourceId
+                - learningBucketId
+                - url
+                # - topic
+                # - description
+            properties:
+                learningBucketResourceId:
+                    type: string
+                learningBucketId:
+                    type: string
+                    description: name of this learning bucket.
+                url:
+                    type: string
+                    description: url for this resource
+                topic:
+                    type: string
+                    description: topic describing this resource
+                description:
+                    type: string
+                    description: description for this resource
+                # type:
+                # 	$ref: '#/components/schemas/PetType'
+        DeleteLearningBucketResource:
+            required:
+                - id
+            properties:
+                id:
+                    type: string

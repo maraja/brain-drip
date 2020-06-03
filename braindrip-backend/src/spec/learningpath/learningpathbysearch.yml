@@ -1,0 +1,68 @@
+learningPathBySearch:
+    get:
+        description: |
+            Get learning by search string
+        operationId: getLearningPathBySearch
+        parameters:
+            -   name: searchString
+                in: path
+                description: search string to search learning paths by
+                required: true
+                schema:
+                    type: string
+        responses:
+            '200':
+                description: learning path response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/LearningPath'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningPath:
+            required:
+                - id
+                - name
+                - description
+                - difficulty
+                - upVotes
+                - downVotes
+                - userId
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                    description: name of this learning path.
+                description:
+                    type: string
+                    description: description of this learning path.
+                difficulty:
+                    type: string
+                    description: level of difficulty for this learning path.
+                upVotes:
+                    type: integer
+                    description: number of upvotes.
+                downVotes:
+                    type: integer
+                    description: number of downvotes.
+                userId:
+                    type: string
+                    description: id of user
+                user: 
+                    type: object
+                    description: object including user information
+                learningPathResources:
+                    type: array
+                    description: array of learning paths.
+                # type:
+                # 	$ref: '#/components/schemas/PetType'

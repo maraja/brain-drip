@@ -1,0 +1,7 @@
+aws-access-key  = "AKIA4DVQ5Y5FFRLKCEFX"
+aws-secret-key  = "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"
+aws-region      = "ca-central-1"
+braindrip-backend-db-password = "bra1ndr1p"
+braindrip-backend-db-username = "user"
+# users-service-db-password = "bra1ndr1p"
+# users-service-db-username = "user"

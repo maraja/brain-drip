@@ -1,0 +1,54 @@
+sessions:
+    post:
+        description: |
+            creates a new session
+        operationId: createSession
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: Session to create
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/User'
+
+        responses:
+            '200':
+                description: session response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Session'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        User:
+            required:
+                - email
+                - password
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+        Session:
+            required:
+                - expiresAt
+                - userId
+                - id
+            properties:
+                expiresAt:
+                    type: string
+                userId:
+                    type: string
+                id:
+                    type: string
+                # type:
+                # 	$ref: '#/components/schemas/PetType'

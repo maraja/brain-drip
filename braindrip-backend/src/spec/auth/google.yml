@@ -1,0 +1,27 @@
+google:
+    get:
+        description: |
+            google auth
+        operationId: googleAuth
+        responses:
+            '200':
+                description: google response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/GoogleAuth'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        GoogleAuth:
+            properties:
+                message:
+                    type: string
