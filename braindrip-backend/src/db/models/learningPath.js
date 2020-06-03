@@ -2,7 +2,11 @@
 
 var difficultyEnum = ['beginner', 'intermediate', 'advanced'];
 
+<<<<<<< HEAD
 module.exports = function(sequelize, DataTypes) {
+=======
+module.exports = (sequelize, DataTypes) => {
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
   var LearningPath = sequelize.define('LearningPath', {
     id: {
         allowNull: false,

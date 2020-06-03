@@ -2,7 +2,11 @@ const JWTStrategy = require('passport-jwt').Strategy;
 // We use this to extract the JWT sent by the user
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 // import jwt from 'jsonwebtoken';
+<<<<<<< HEAD
 import db from "#root/db";
+=======
+import {User} from "#root/db";
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
 import jwt from "#root/server/auth/jwt";
@@ -12,12 +16,19 @@ import {Strategy as FacebookStrategy} from "passport-facebook";
 // import {GoogleStrategy} from "passport-google-oauth";
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+<<<<<<< HEAD
 const {User} = db;
+=======
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const config = require('config');
 
 // implement this: https://www.twilio.com/blog/facebook-oauth-login-node-js-app-passport-js
 
+<<<<<<< HEAD
 export default function (passport) {
+=======
+module.exports = function (passport) {
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
     let opts = {
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: config.jwt.secret

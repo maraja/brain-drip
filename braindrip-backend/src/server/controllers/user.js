@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import db from "#root/db";
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
 
 const { User, Favorites, LearningPath, LearningPathResource } = db;
 
+=======
+import { User, Favorites, LearningPath, LearningPathResource } from "#root/db";
+import generateUUID from "#root/helpers/generateUUID";
+import hashPassword from "#root/helpers/hashPassword";
+
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const getAllUsers = async (req, res, next) => {
     // if (!req.body.email || !req.body.password) {
     //     return next(new Error("Invalid body!"));

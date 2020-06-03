@@ -1,8 +1,12 @@
 import got from 'got';
 
+<<<<<<< HEAD
 import accessEnv from "#root/helpers/accessEnv"
 
 const BRAINDRIP_BACKEND_URI = accessEnv("BRAINDRIP_BACKEND_URI");
+=======
+const BRAINDRIP_BACKEND_URI = "http://braindrip-backend:7101/v1";
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
 export default class BrainDripService {
 

@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import db from '#root/db';
+=======
+import db, { User, LearningPath, LearningPathResource, Favorites } from '#root/db';
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 import faker from 'faker';
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
 import accessEnv from "#root/helpers/accessEnv";
 
+<<<<<<< HEAD
 const { User, LearningPath, LearningPathResource, Favorites } = db;
 
 // Look at this: https://stackoverflow.com/questions/49945732/one-to-one-relation-using-sequelize
@@ -15,6 +20,15 @@ console.log("Mock data:", MOCK_DATA)
 
 console.log(User);
 
+=======
+// Look at this: https://stackoverflow.com/questions/49945732/one-to-one-relation-using-sequelize
+
+
+const MOCK_DATA = accessEnv("MOCK_DATA", "no");
+
+console.log("Mock data:", MOCK_DATA)
+
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const makeNewFavorites = (users, paths, num_favorites=100) => {
     let new_favorites = []
     if (!users || !paths || users.length == 0 || paths.length == 0) {
@@ -82,7 +96,11 @@ const makeNewUsers = (num_users=20) => {
     return new_users;
 }
 
+<<<<<<< HEAD
 if (MOCK_DATA) {
+=======
+if (MOCK_DATA == "yes") {
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
     const NUM_NEW_USERS = 20
     const NUM_NEW_RESOURCES = 100
@@ -90,7 +108,11 @@ if (MOCK_DATA) {
     let new_users = makeNewUsers(NUM_NEW_USERS);
     let new_paths = makeNewPaths(20, new_users);
     let new_resources = makeNewResources(new_paths);
+<<<<<<< HEAD
     // let new_favorites = makeNewFavorites(new_users, new_paths);
+=======
+    let new_favorites = makeNewFavorites(new_users, new_paths);
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
     // console.log(new_paths)
 
@@ -103,11 +125,19 @@ if (MOCK_DATA) {
             let newUsers = await User.bulkCreate(new_users);
             let newPaths = await LearningPath.bulkCreate(new_paths);
             let newResources = await LearningPathResource.bulkCreate(new_resources);
+<<<<<<< HEAD
             // let newFavorites = await Favorites.bulkCreate(new_favorites);
             newUsers = newUsers.map(u => u.get())
             newPaths = newPaths.map(p => p.get())
             newResources = newResources.map(p => p.get())
             // newFavorites = newFavorites.map(f => f.get())
+=======
+            let newFavorites = await Favorites.bulkCreate(new_favorites);
+            newUsers = newUsers.map(u => u.get())
+            newPaths = newPaths.map(p => p.get())
+            newResources = newResources.map(p => p.get())
+            newFavorites = newFavorites.map(f => f.get())
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 
             // console.log(newPaths)
         } catch(err) {

@@ -1,0 +1,54 @@
+{
+  "name": "braindrip-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "babel-watch": "^7.0.0"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "@babel/core": "^7.7.7",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/preset-env": "^7.7.7",
+    "antd": "^4.0.1",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link-http": "^1.5.16",
+    "axios": "^0.19.2",
+    "babel-plugin-import": "^1.13.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "customize-cra": "^0.9.1",
+    "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.1",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "module-alias": "^2.2.2",
+    "react": "^16.8.0",
+    "react-apollo": "^3.1.3",
+    "react-app-rewired": "^2.1.5",
+    "react-dom": ">= 16.8.0",
+    "react-hook-form": "^4.8.0",
+    "react-is": ">= 16.8.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "styled-components": "^5.0.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "_moduleAliases": {
+    "#root": "./src"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

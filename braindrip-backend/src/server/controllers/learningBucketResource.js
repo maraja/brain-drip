@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import db from "#root/db";
 import generateUUID from "#root/helpers/generateUUID";
 import Sequelize, { Op } from 'sequelize';
 
 const { User, Favorites, LearningBucket, LearningBucketResource } = db;
 
+=======
+import { User, Favorites, LearningBucket, LearningBucketResource } from "#root/db";
+import generateUUID from "#root/helpers/generateUUID";
+import Sequelize, { Op } from 'sequelize';
+
+>>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
 const createLearningBucketResource = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
