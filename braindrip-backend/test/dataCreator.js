@@ -9,11 +9,11 @@ const { User, LearningPath, LearningPathResource, Favorites } = db;
 // Look at this: https://stackoverflow.com/questions/49945732/one-to-one-relation-using-sequelize
 
 
-const MOCK_DATA = accessEnv("MOCK_DATA", "yes");
+const MOCK_DATA = accessEnv("MOCK_DATA");
 
-console.log("Mock data:", MOCK_DATA)
+console.log("Create mock data:", MOCK_DATA)
 
-console.log(User);
+// console.log(User);
 
 const makeNewFavorites = (users, paths, num_favorites=100) => {
     let new_favorites = []
@@ -82,7 +82,7 @@ const makeNewUsers = (num_users=20) => {
     return new_users;
 }
 
-if (MOCK_DATA) {
+if (MOCK_DATA == "yes") {
 
     const NUM_NEW_USERS = 20
     const NUM_NEW_RESOURCES = 100

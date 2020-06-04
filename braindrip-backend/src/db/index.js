@@ -16,7 +16,7 @@ var basename  = 'index.js';
 // require("./models");
 
 let modelFolder = path.join(process.cwd(), 'src', 'db', 'models')
-console.log("models", modelFolder)
+// console.log("models", modelFolder)
 
 fs
   .readdirSync(modelFolder)
@@ -25,7 +25,7 @@ fs
   })
   .forEach(file => {
     var model = db['import'](path.join(modelFolder, file));
-    console.log(model);
+    // console.log(model);
     db[model.name] = model;
   });
 

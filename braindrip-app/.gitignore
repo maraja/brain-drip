@@ -26,6 +26,9 @@ coverage
 .env
 .env.test
 
+.env.production
+deploy.sh
+
 # nyc test coverage
 .nyc_output
 
