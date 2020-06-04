@@ -4,11 +4,8 @@ services:
         build: "./api-gateway"
         depends_on:
             - braindrip-backend
-<<<<<<< HEAD
         environment:
             - BRAINDRIP_BACKEND_URI=http://braindrip-backend:7101/v1
-=======
->>>>>>> 461ae08e90c0639bf52d9c202d1f2a55301920af
         ports:
             - 7000:7000
         volumes:

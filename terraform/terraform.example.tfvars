@@ -1,3 +1,5 @@
-aws-access-key  = "AKIA4DVQ5Y5FKOBRLT4B"
-aws-secret-key  = "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"
+aws-access-key  = ""
+aws-secret-key  = ""
 aws-region      = "ca-central-1"
+braindrip-backend-db-password = ""
+braindrip-backend-db-username = ""
