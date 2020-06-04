@@ -22,10 +22,6 @@ lib-cov
 coverage
 *.lcov
 
-# dotenv environment variables file
-.env
-.env.test
-
 # nyc test coverage
 .nyc_output
 
@@ -88,6 +84,11 @@ out
 .nuxt
 dist
 
+# environment files
+.env
+.deploy.env
+.production.env
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js
@@ -118,7 +119,3 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-
-# deploy script
-deploy.sh
