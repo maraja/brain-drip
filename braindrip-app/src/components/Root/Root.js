@@ -63,7 +63,7 @@ function About() {
     return (
         <Wrapper>
             <Container>
-                <h1>This is my about page.</h1>
+                <h1 className="text-gray-500">This is my about page.</h1>
                 <Button type="primary" htmlType="submit">
                     确定
                 </Button>
