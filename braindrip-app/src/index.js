@@ -11,7 +11,7 @@ import Root from "#root/components/Root";
 import {BrowserRouter} from 'react-router-dom';
 
 import * as theme from "./theme";
-
+import "./index.css";
 import "#root/assets/_styles.scss"
 
 const GlobalStyle = createGlobalStyle `

@@ -1,47 +1,36 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 import GoogleButton from "#root/components/Social/google";
 import FacebookButton from "#root/components/Social/facebook";
+import Header from "#root/components/Root/Layout/Header";
+import Content from "#root/components/Root/Layout/Content";
+import Footer from "#root/components/Root/Layout/Footer";
+import { Divider } from "antd";
 
-import {Button} from 'antd';
-
-const Container = styled.div `
-    display: flex;
-    flex-flow: row nowrap;
-    margin: 0 auto;
-    width: 80rem;
-`;
-
-const Content = styled.div `
-    flex: 1;
-    margin-right: 1rem;
-`
-
-const Wrapper = styled.div `
-    box-sizing: border-box;
-    height: 100%;
-    padding: 1rem;
-    width: 100%;
+const Wrapper = styled.div`
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0.5rem;
+  width: 100%;
 `;
 
 class Home extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {}
-    }
+    this.state = {};
+  }
 
-    render() {
-        return (
-            <Wrapper>
-                <Container>
-                    <Content>Amit is a batty boy</Content>
-                    <Button/>
-                </Container>
-            </Wrapper>
-        )
-    }
-} Home.propTypes = {}
+  render() {
+    return (
+      <Wrapper>
+        <Header isLoggedIn={false}/>
+        <Divider />
+        <Content />
+        <Footer />
+      </Wrapper>
+    );
+  }
+}
 
-export default Home
+export default Home;
