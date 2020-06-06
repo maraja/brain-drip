@@ -3,7 +3,7 @@ import { Divider } from "antd";
 import styled from "styled-components";
 
 import Header from "#root/components/Root/Layout/Header";
-import Content from "./LoginContent";
+import Content from "./RegisterContent";
 import Footer from "#root/components/Root/Layout/Footer";
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -21,7 +21,7 @@ class Login extends Component {
   render() {
     return (
       <Wrapper>
-        <Header isLoggedIn={false} />
+        <Header isLoggedIn={false}/>
         <Divider />
         <Content />
         <Footer />
@@ -30,4 +30,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;
