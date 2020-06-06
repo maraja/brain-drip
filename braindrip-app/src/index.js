@@ -13,6 +13,7 @@ import {BrowserRouter} from 'react-router-dom';
 import * as theme from "./theme";
 import "./index.css";
 import "#root/assets/_styles.scss"
+import "#root/assets/app.pcss"
 
 const GlobalStyle = createGlobalStyle `
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');

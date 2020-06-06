@@ -8,3 +8,6 @@ backend:
 - upvote api call
 - downvote api call
 - delete api calls
+
+
+AWS CLI v1 necessary
