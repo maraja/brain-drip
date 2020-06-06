@@ -173,6 +173,7 @@ const typeDefs = gql`
         user_list: [User]
         user(id: String!): User
         learningPath(id: String!): LearningPath
+        learningPathSearch(searchString: String!): [LearningPath]
         learningPathResource(id: String!): LearningPathResource
         learningBucket(id: String!): LearningBucket
         learningBucketResource(id: String!): LearningBucketResource

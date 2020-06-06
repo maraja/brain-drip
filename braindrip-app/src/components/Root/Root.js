@@ -10,7 +10,7 @@ import Home from "./Home";
 import UserHome from "./UserHome";
 
 // import 'antd/dist/antd.css'
-import "./Root.less";
+import "./app.less";
 
 import { Button } from "antd";
 
@@ -83,7 +83,7 @@ const LearningPaths = () => {
       <div>
         {data.user_list.map((user) => (
           <div key={user.id}>
-            <h2>{user.firstName}</h2>
+            <h2 className="text-gray-500">{user.firstName}</h2>
             <h4>{user.lastName}</h4>
             {user.learningPaths &&
               user.learningPaths.map((lp) => (

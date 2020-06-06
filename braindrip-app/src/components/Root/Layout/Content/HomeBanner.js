@@ -5,6 +5,10 @@ const { Title } = Typography;
 
 import { Button } from "antd";
 import banner from "#root/assets/img/banner1.png";
+import Logo from "#root/assets/img/logo/logo_1.svg";
+
+
+import AutoCompleteSearch from "#root/components/bd-components/AutoCompleteSearch.js";
 
 const BannerImage = styled.div`
   background-color: #ffffff;
@@ -43,6 +47,7 @@ class HomeBanner extends Component {
             </Button>
           </Card>
         </BannerImage>
+        <AutoCompleteSearch />
       </section>
     );
   }

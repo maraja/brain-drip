@@ -9,7 +9,7 @@
     "deploy:linux": "bash ./deploy.sh",
     "deploy": "deploy.windows.bat",
     "predeploy": "cross-env NODE_ENV=production yarn build",
-    "watch": "parcel --port=7001 src/index.html"
+    "watch": "cross-env NODE_ENV=development parcel --port=7001 src/index.html"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

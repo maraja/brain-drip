@@ -15,6 +15,7 @@ import { UserOutlined, DownOutlined } from "@ant-design/icons";
 const { Header } = Layout;
 const { Search } = Input;
 import logo from "#root/logo.png";
+import Logo from "#root/components/bd-components/Logo";
 
 import { Button } from "antd";
 
@@ -116,20 +117,18 @@ class BrainDripHeader extends Component {
     return (
       <div className="header">
         {/* Replace backgroundColor with proper theme */}
-        <Header style={{ padding: "0px", backgroundColor: "white" }}>
+        <Header style={{ height: '50px', padding: "0px 5%", backgroundColor: "white" }}>
           <Row>
-            <Col span={6} order={1}>
-              <a href="/">
-                <img src={logo} width="200" height="50" alt="Logo" />
-              </a>
+            <Col span={18} order={1}>
+              <Logo />
             </Col>
-            <Col span={12} order={3}>
+            {/* <Col span={12} order={3}>
               <Search
                 style={{ verticalAlign: "middle" }}
                 placeholder="Search your path"
                 enterButton
               />
-            </Col>
+            </Col> */}
             <Col span={6} order={4}>
               <Space style={{ float: "right" }}>{headerRight}</Space>
             </Col>

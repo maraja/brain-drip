@@ -30,6 +30,11 @@ export default class BrainDripService {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/id/${id}`).json();
         return body.learningPath;
     }
+    
+    static async fetchLearningPathsBySearch({ searchString }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/search/${searchString}`).json();
+        return body;
+    }
 
     static async createLearningPath({ name, description, tags, difficulty, userId }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
