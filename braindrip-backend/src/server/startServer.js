@@ -8,6 +8,8 @@ import setupPassport from '#root/server/auth/passport'
 
 import accessEnv from "#root/helpers/accessEnv";
 
+import formatSequelizeError from "./formatSequelizeError"
+
 import setupRoutes from './routes';
 
 const PORT = accessEnv("PORT", 7101);
@@ -41,9 +43,10 @@ new OpenApiValidator({
     setupPassport(passport);
 
     app.use((err, req, res, next) => {
-        console.log(err)
+        // console.log(err)
+        let formattedError = formatSequelizeError(err)
         let statusCode = err.status || 500;
-        return res.status(statusCode).json({message: err.message})
+        return res.status(statusCode).json({message: formattedError.message || err.message, success: false, error: err})
     });
 
     app.listen(PORT, "0.0.0.0", () => {

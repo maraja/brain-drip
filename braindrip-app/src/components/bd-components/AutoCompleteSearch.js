@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "react-apollo";
+import { useQuery, useMutation } from "@apollo/client";
 
 import { AutoComplete } from 'antd';
 const { Option } = AutoComplete;
@@ -30,15 +30,15 @@ const AutoCompleteSearch = ({ width = '100%' }) => {
     return (
         <AutoComplete
             style={{ width }}
-            placeholder="Search a learning path"
+            placeholder="Search for a learning path"
             onSearch={search}
         >
             {data && data.learningPathSearch.map(r => (
-            <Option key={r.id} value={r.name}>
-              {r.name}
-            </Option>
-          ))}
-          </AutoComplete>
+                <Option key={r.id} value={r.name}>
+                    {r.name}
+                </Option>
+            ))}
+        </AutoComplete>
     )
 }
 

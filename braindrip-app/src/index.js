@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 
 import React from "react";
-import {ApolloProvider} from 'react-apollo';
+import {ApolloProvider} from "@apollo/client";
 import {render} from "react-dom";
 import {createGlobalStyle, ThemeProvider} from "styled-components";
 
@@ -9,6 +9,13 @@ import graphqlClient from "#root/api/graphqlClient";
 import Root from "#root/components/Root";
 
 import {BrowserRouter} from 'react-router-dom';
+
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import rootReducer from './reducers'
 
 import * as theme from "./theme";
 import "./index.css";
@@ -29,11 +36,15 @@ const GlobalStyle = createGlobalStyle `
     }
 `;
 
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+
 render (<ApolloProvider client={graphqlClient}>
-    <ThemeProvider theme={theme}>
-        <GlobalStyle/>
-        <BrowserRouter>
-            <Root/>
-        </BrowserRouter>,
-    </ThemeProvider>
+    <Provider store={store}>
+        <ThemeProvider theme={theme}>
+            <GlobalStyle/>
+            <BrowserRouter>
+                <Root/>
+            </BrowserRouter>,
+        </ThemeProvider>
+    </Provider>
 </ApolloProvider>, document.getElementById("app"))

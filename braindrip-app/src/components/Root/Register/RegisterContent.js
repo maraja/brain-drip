@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import {
@@ -13,7 +14,6 @@ import {
   Input,
   Button,
 } from "antd";
-const { Content } = Layout;
 const { Text } = Typography;
 const onFinish = (values) => {
   console.log("Received values of form: ", values);
@@ -26,10 +26,9 @@ class RegisterContent extends Component {
 
   render() {
     return (
-      <Content>
         <section>
           <Row type="flex" align="middle">
-            <Col span={4} offset={10}>
+            <Col span={24}>
               <div>
                 <Text strong="true">Sign up and create your Path!</Text>
               </div>
@@ -127,15 +126,14 @@ class RegisterContent extends Component {
                 <Divider />
                 <Form.Item style={{ textAlign: "center" }}>
                   Already have an account?{" "}
-                  <a className="login-form-forgot" href="/login">
+                  <Link className="login-form-forgot" to="/login">
                     Log in
-                  </a>
+                  </Link>
                 </Form.Item>
               </Form>
             </Col>
           </Row>
         </section>
-      </Content>
     );
   }
 }

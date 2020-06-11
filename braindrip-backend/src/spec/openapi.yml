@@ -13,6 +13,8 @@ servers:
 paths:
   /users:
     $ref: './users/users.yml#/users'
+  /users/login:
+    $ref: './users/userLogin.yml#/userLogin'
   /users/{id}:
     $ref: './users/userById.yml#/userById'
   /learning-path:

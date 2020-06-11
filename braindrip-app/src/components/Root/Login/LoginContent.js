@@ -1,6 +1,8 @@
-import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import React, { Component } from "react";
+import { useLazyQuery } from "@apollo/client";
+import React, { Component, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import {
@@ -13,19 +15,27 @@ import {
   Input,
   Button,
 } from "antd";
-const { Content } = Layout;
+
+import SmallError from "#root/components/bd-components/SmallError"
+import SmallSuccess from "#root/components/bd-components/SmallSuccess"
+
+import { loginUser } from "#root/actions/userActions"
+
 const { Text } = Typography;
 // note REM units stand for relative to root element font-size.
-const mutation = gql`
-  mutation($email: String!, $password: String!) {
-    createUserSession(email: $email, password: $password) {
-      id
-      user {
-        email
-        id
-      }
+
+const LOGIN_USER = gql`
+    query userLogin($email: String!, $password: String!) {
+        userLogin(email: $email, password: $password) {
+          success
+          message
+          user {
+            id
+            firstName
+            lastName
+          }
+        }
     }
-  }
 `;
 /*
 const [createUserSession] = useMutation(mutation);
@@ -48,108 +58,127 @@ const onSubmit = handleSubmit(async ({ email, password }) => {
 const onFinish = (values) => {
   console.log("Received values of form: ", values);
 };
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+
+let email = ""
+let password = ""
+
+const LoginContent = () => {
+  const [queryLogin, { loading, data, error }] = useLazyQuery(LOGIN_USER, {variables: {email, password}})
+
+  const { user: reduxUser } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  const onFinish = async values => {
+    email = values.email;
+    password = values.password;
+    let results = await queryLogin()
+    // console.log(data, loading, results)
   }
 
-  render() {
-    return (
-      <Content>
-        <section>
-          <Row type="flex" align="middle">
-            <Col span={4} offset={10}>
-              <div>
-                <Text strong="true">Log in to Your BrainDrip Account!</Text>
-              </div>
-              <Divider />
+  useEffect(() => {
+    console.log(loading, data, error)
+    if (error) SmallError(error.message);
+    else if (data) {
+      SmallSuccess(data.userLogin.message);
+      const { user } = data.userLogin;
+      dispatch(loginUser(user));
+    }
+  }, [data])
 
-              <Button
-                type="primary"
-                size="large"
-                className="login-form-button ant-form-item"
-              >
-                Continue with Facebook
-              </Button>
-              <Button
-                type="danger"
-                size="large"
-                className="login-form-button ant-form-item"
-              >
-                Continue with Google
-              </Button>
-              <Form
-                name="normal_login"
-                className="login-form"
-                initialValues={{
-                  remember: true,
-                }}
-                onFinish={onFinish}
-              >
-                <Form.Item
-                  name="email"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Email!",
-                    },
-                  ]}
-                >
-                  <Input
-                    size="large"
-                    prefix={<MailOutlined className="site-form-item-icon" />}
-                    placeholder="Email"
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Password!",
-                    },
-                  ]}
-                >
-                  <Input
-                    size="large"
-                    prefix={<LockOutlined className="site-form-item-icon" />}
-                    type="password"
-                    placeholder="Password"
-                  />
-                </Form.Item>
+  return (
+    
+    <section id="login-component">
+      {reduxUser && <h1>{reduxUser.firstName}</h1>}
+    <Row type="flex" align="middle">
+      <Col span={24}>
+        <div>
+          <Text strong="true">Log in to Your BrainDrip Account!</Text>
+        </div>
+        <Divider />
 
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    size="large"
-                    htmlType="submit"
-                    className="login-form-button"
-                  >
-                    Log in
-                  </Button>
-                  <div style={{ textAlign: "center" }}>
-                    or{" "}
-                    <a href="/forgot">
-                      Forgot Password
-                    </a>
-                  </div>
-                </Form.Item>
+        <Button
+          type="primary"
+          size="large"
+          className="login-form-button ant-form-item"
+        >
+          Continue with Facebook
+        </Button>
+        <Button
+          type="danger"
+          size="large"
+          className="login-form-button ant-form-item"
+        >
+          Continue with Google
+        </Button>
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+        >
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Email!",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              prefix={<MailOutlined className="site-form-item-icon" />}
+              placeholder="Email"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Password!",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
 
-                <Divider />
-                <Form.Item style={{ textAlign: "center" }}>
-                  Don't have an account yet? {" "}
-                  <a className="login-form-forgot" href="/signup">
-                    Sign up
-                  </a>
-                </Form.Item>
-              </Form>
-            </Col>
-          </Row>
-        </section>
-      </Content>
-    );
-  }
+          <Form.Item>
+            <Button
+              type="primary"
+              size="large"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Log in
+            </Button>
+            <div style={{ textAlign: "center" }}>
+              or{" "}
+              <a href="/forgot">
+                Forgot Password
+              </a>
+            </div>
+          </Form.Item>
+
+          <Divider />
+          <Form.Item style={{ textAlign: "center" }}>
+            Don't have an account yet? {" "}
+            <Link className="login-form-forgot" to="/signup">
+              Sign up
+            </Link>
+          </Form.Item>
+        </Form>
+      </Col>
+    </Row>
+  </section>
+  )
 }
 
-export default Login;
+export default LoginContent

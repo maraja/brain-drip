@@ -1,8 +1,13 @@
 import db from "#root/db";
+import HE from "#root/helpers/errorHandling";
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
+import passwordCompareSync from "#root/helpers/passwordCompareSync";
 
 const { User, Favorites, LearningPath, LearningPathResource } = db;
+
+
+const USER_SESSION_EXPIRY_HOURS = 1;
 
 const getAllUsers = async (req, res, next) => {
     // if (!req.body.email || !req.body.password) {
@@ -38,6 +43,44 @@ const createUser = async (req, res, next) => {
     } catch(e) {
         return next(e);
     }
+}
+
+const loginUser = async (req, res, next) => {
+    if (!req.body.email || !req.body.password) {
+        return  next(HE(400, "Invalid body!"));
+      }
+      
+    const { email, password } = req.body;
+  
+      try {
+        let user = await User.findOne({ attributes: {}, where: { email } });
+  
+        if (!user) return next(HE(400, "Invalid email!"));
+
+        user = user.toJSON()
+  
+        if (!passwordCompareSync(password, user.passwordHash)) {
+          return next(HE(400, "Incorrect password!" ));
+        }
+  
+        // const expiresAt = addHours(new Date(), USER_SESSION_EXPIRY_HOURS);
+  
+        // const sessionToken = generateUUID();
+  
+        // const userSession = await UserSession.create({
+        //   expiresAt,
+        //   id: sessionToken,
+        //   userId: user.id
+        // });
+  
+        return res.json({
+            message:"User successfully logged in.",
+            success: true,
+            user: { ...user, passwordHash: undefined }
+        });
+      } catch (e) {
+        return next(e);
+      }
 }
 
 const getUserById = async (req, res, next) => {
@@ -89,5 +132,6 @@ const getUserById = async (req, res, next) => {
 export default {
     getAllUsers,
     createUser,
+    loginUser, 
     getUserById
 }

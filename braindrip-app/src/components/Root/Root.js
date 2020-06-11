@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import UserHome from "./UserHome";
+import LearningPaths from "./LearningPath/LearningPaths";
 
 // import 'antd/dist/antd.css'
 import "./app.less";
@@ -68,51 +69,52 @@ function About() {
           确定
         </Button>
       </Container>
-      <LearningPaths />
+      {/* <LearningPaths /> */}
     </Wrapper>
   );
 }
 
-const LearningPaths = () => {
-  const { data, loading, refetch } = useQuery(query);
+// const LearningPaths = () => {
+//   const { data, loading, refetch } = useQuery(query);
 
-  if (loading || !data) return "Loading...";
+//   if (loading || !data) return "Loading...";
 
-  return (
-    <Wrapper>
-      <div>
-        {data.user_list.map((user) => (
-          <div key={user.id}>
-            <h2 className="text-gray-500">{user.firstName}</h2>
-            <h4>{user.lastName}</h4>
-            {user.learningPaths &&
-              user.learningPaths.map((lp) => (
-                <div key={lp.id}>
-                  <h2>{lp.name}</h2>
-                  <h4>{lp.description}</h4>
-                </div>
-              ))}
-          </div>
-        ))}
-      </div>
-      {/* <AddListing
-            onAddListing={() => {
-            refetch();
-            }}
-        /> */}
-    </Wrapper>
-  );
-};
+//   return (
+//     <Wrapper>
+//       <div>
+//         {data.user_list.map((user) => (
+//           <div key={user.id}>
+//             <h2 className="text-gray-500">{user.firstName}</h2>
+//             <h4>{user.lastName}</h4>
+//             {user.learningPaths &&
+//               user.learningPaths.map((lp) => (
+//                 <div key={lp.id}>
+//                   <h2>{lp.name}</h2>
+//                   <h4>{lp.description}</h4>
+//                 </div>
+//               ))}
+//           </div>
+//         ))}
+//       </div>
+//       {/* <AddListing
+//             onAddListing={() => {
+//             refetch();
+//             }}
+//         /> */}
+//     </Wrapper>
+//   );
+// };
 
 function Root() {
   return (
     <Switch>
       <Route path="/" component={Home} exact />
-      <Route path="/login" component={Login} />{" "}
-      <Route path="/signup" component={Register} />{" "}
-      <Route path="/home" component={UserHome} />{" "}
-      <Route path="/about" component={About} />{" "}
-      {/* <Route path="/shop" component={Shop} /> */}{" "}
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Register} />
+      <Route path="/home" component={UserHome} />
+      <Route path="/about" component={About} />
+      <Route path="/learning-paths" component={LearningPaths} />
+      {/* <Route path="/shop" component={Shop} /> */}
     </Switch>
   );
 }
