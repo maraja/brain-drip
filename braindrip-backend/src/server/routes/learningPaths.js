@@ -4,7 +4,9 @@ let router = express.Router();
 import learningPathController from "#root/server/controllers/learningPath";
 
 const {
+    getLearningPaths,
     getLearningPathById,
+    getLearningPathsByUserId,
     createLearningPath,
     updateLearningPath,
     deleteLearningPath,
@@ -18,6 +20,10 @@ router.put("/", updateLearningPath)
 router.delete("/", deleteLearningPath)
 
 router.get("/id/:learningPathId", getLearningPathById)
+
+router.get("/", getLearningPaths)
+
+router.get("/user", getLearningPathsByUserId)
 
 router.get("/search", searchLearningPathsByParams)
 

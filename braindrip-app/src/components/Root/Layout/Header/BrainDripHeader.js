@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import {
   Layout,
   Avatar,
@@ -84,16 +85,16 @@ class BrainDripHeader extends Component {
       const menu = (
         <Menu style={{ width: 256 }}>
           <Menu.Item key="edit">
-            <a href="/edit">Edit Profile</a>
+            <Link to="/edit">Edit Profile</Link>
           </Menu.Item>
           <Menu.Item key="account">
-            <a href="/account">Account</a>
+            <Link to="/account">Account</Link>
           </Menu.Item>
           <Menu.Item key="notifications">
-            <a href="/notifications">Notifications</a>
+            <Link to="/notifications">Notifications</Link>
           </Menu.Item>
           <Menu.Item key="help">
-            <a href="/help">Help</a>
+            <Link to="/help">Help</Link>
           </Menu.Item>
         </Menu>
       );

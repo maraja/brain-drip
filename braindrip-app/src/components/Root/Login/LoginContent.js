@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import { Link } from 'react-router-dom';
 import gql from "graphql-tag";
 import React, { Component } from "react";
 import { useForm } from "react-hook-form";
@@ -130,18 +131,18 @@ class Login extends Component {
                   </Button>
                   <div style={{ textAlign: "center" }}>
                     or{" "}
-                    <a href="/forgot">
+                    <Link to="/forgot">
                       Forgot Password
-                    </a>
+                    </Link>
                   </div>
                 </Form.Item>
 
                 <Divider />
                 <Form.Item style={{ textAlign: "center" }}>
                   Don't have an account yet? {" "}
-                  <a className="login-form-forgot" href="/signup">
+                  <Link to="/signup" className="login-form-forgot" >
                     Sign up
-                  </a>
+                  </Link>
                 </Form.Item>
               </Form>
             </Col>

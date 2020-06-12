@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import {
@@ -116,20 +117,20 @@ class RegisterContent extends Component {
                 </Form.Item>
                 <Form.Item style={{ textAlign: "center", fontSize: "10px" }}>
                   By signing up, you agree to our{" "}
-                  <a className="login-form-forgot" href="/terms">
+                  <Link to="/terms" className="login-form-forgot">
                     Terms of Use
-                  </a>{" "}
+                  </Link>{" "}
                   and{" "}
-                  <a className="login-form-forgot" href="/terms/privacy">
+                  <Link to="/terms/privacy" className="login-form-forgot">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </Form.Item>
                 <Divider />
                 <Form.Item style={{ textAlign: "center" }}>
                   Already have an account?{" "}
-                  <a className="login-form-forgot" href="/login">
+                  <Link to="/login" className="login-form-forgot">
                     Log in
-                  </a>
+                  </Link>
                 </Form.Item>
               </Form>
             </Col>

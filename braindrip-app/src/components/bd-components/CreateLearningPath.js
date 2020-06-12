@@ -24,9 +24,7 @@ const AutoCompleteSearch = ({ width = '100%' }) => {
 
     const search = value => setSearchString(value)
 
-    // useEffect(() =>{
-    //     console.log(data, loading, error)
-    // })
+   
 
     return (
         <AutoComplete

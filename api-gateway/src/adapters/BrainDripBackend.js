@@ -26,19 +26,29 @@ export default class BrainDripService {
 
 
     // LEARNING PATHS
+    static async fetchLearningPaths() {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path`).json();
+        return body.learningPaths;
+    }
+    
+    static async fetchLearningPathsByUser() {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/`).json();
+        return body.learningPaths;
+    }
+    
     static async fetchLearningPath({ id }) {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/id/${id}`).json();
         return body.learningPath;
     }
-    
+
     static async fetchLearningPathsBySearch({ searchString }) {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/search/${searchString}`).json();
         return body;
     }
 
-    static async createLearningPath({ name, description, tags, difficulty, userId }) {
+    static async createLearningPath({ name, description, tags, difficulty }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
-            json: { name, description, tags, difficulty, userId }
+            json: { name, description, tags, difficulty }
         }).json();
         return body;
     }
@@ -130,7 +140,6 @@ export default class BrainDripService {
         const body = await got.put(`${BRAINDRIP_BACKEND_URI}/learning-bucket/resource`, {
             json: { id, learningBucketId, url, topic, description }
         }).json();
-        console.debug(body);
         return body;
     }
 
