@@ -19,11 +19,14 @@ const { Search } = Input;
 import logo from "#root/logo.png";
 import Logo from "#root/components/bd-components/Logo";
 
+import { logoutUser } from "#root/actions/userActions";
+
 import { Button } from "antd";
 
 function BrainDripHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user } = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   let headerRight;
 
@@ -99,6 +102,9 @@ function BrainDripHeader() {
         </Menu.Item>
         <Menu.Item key="help">
           <a href="/help">Help</a>
+        </Menu.Item>
+        <Menu.Item key="signout">
+          <a onClick={() => dispatch(logoutUser())}>Sign Out</a>
         </Menu.Item>
       </Menu>
     );

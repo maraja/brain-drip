@@ -89,8 +89,8 @@ const typeDefs = gql`
     }
 
     type UserCreateResponse {
-        success: Boolean
-        message: String
+        success: Boolean!
+        message: String!
         newUser: User
     }
 

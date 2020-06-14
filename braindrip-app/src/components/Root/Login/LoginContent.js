@@ -4,7 +4,6 @@ import gql from "graphql-tag";
 import { useLazyQuery } from "@apollo/client";
 import React, { Component, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import {
@@ -63,7 +62,7 @@ const LoginContent = () => {
       const { user } = data.userLogin;
       dispatch(loginUser(user));
     }
-  }, [data])
+  }, [data, error])
 
   return (
     
