@@ -37,27 +37,6 @@ const LOGIN_USER = gql`
         }
     }
 `;
-/*
-const [createUserSession] = useMutation(mutation);
-const {
-  formState: { isSubmitting },
-  handleSubmit,
-  register,
-} = useForm();
-
-const onSubmit = handleSubmit(async ({ email, password }) => {
-  const result = await createUserSession({
-    variables: {
-      email,
-      password,
-    },
-  });
-
-  console.log(result);
-});*/
-const onFinish = (values) => {
-  console.log("Received values of form: ", values);
-};
 
 let email = ""
 let password = ""
@@ -76,7 +55,6 @@ const LoginContent = () => {
   }
 
   useEffect(() => {
-    console.log(loading, data, error)
     if (error) SmallError(error.message);
     else if (data) {
       SmallSuccess(data.userLogin.message);

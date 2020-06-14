@@ -14,7 +14,10 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-
+import { persistStore, persistReducer } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+ 
 import rootReducer from './reducers'
 
 import * as theme from "./theme";
@@ -36,15 +39,25 @@ const GlobalStyle = createGlobalStyle `
     }
 `;
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+const persistConfig = {
+    key: 'root',
+    storage,
+  }
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)))
+const persistor = persistStore(store)
 
 render (<ApolloProvider client={graphqlClient}>
     <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
             <GlobalStyle/>
             <BrowserRouter>
                 <Root/>
             </BrowserRouter>,
         </ThemeProvider>
+      </PersistGate>
     </Provider>
 </ApolloProvider>, document.getElementById("app"))
