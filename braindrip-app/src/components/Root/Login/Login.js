@@ -1,33 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import { Divider } from "antd";
 import styled from "styled-components";
 
-import Header from "#root/components/Root/Layout/Header";
-import Content from "./LoginContent";
-import Footer from "#root/components/Root/Layout/Footer";
-const Wrapper = styled.div`
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0.5rem;
-  width: 100%;
-`;
+import LoginContent from "./LoginContent";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+import Layout from "#root/components/Root/Layout";
+import Container from "#root/components/bd-components/Container";
 
-  render() {
-    return (
-      <Wrapper>
-        <Header isLoggedIn={false} />
-        <Divider />
-        <Content />
-        <Footer />
-      </Wrapper>
-    );
-  }
+function Login() {
+  return (
+    <Layout>
+        <Container>
+          <LoginContent />
+        </Container>
+      </Layout>
+  )
 }
 
-export default Login;
+export default Login

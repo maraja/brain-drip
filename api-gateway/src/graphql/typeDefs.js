@@ -78,7 +78,7 @@ const typeDefs = gql`
         id: ID!
         firstName: String!
         lastName: String!
-        profilePicture: String!
+        profilePicture: String
         learningPaths: [LearningPath]
         favorites: [Favorite]
     }
@@ -92,6 +92,12 @@ const typeDefs = gql`
         success: Boolean
         message: String
         newUser: User
+    }
+
+    type UserLoginResponse {
+        success: Boolean!
+        message: String!
+        user: User
     }
 
     type LearningPathCreateResponse {
@@ -173,6 +179,7 @@ const typeDefs = gql`
         # return null if it isn't them.
         user_list: [User]
         user(id: String!): User
+        userLogin(email: String!, password: String!): UserLoginResponse
         learningPath(id: String!): LearningPath
         learningPaths: [LearningPath]
         userLearningPaths: [LearningPath]

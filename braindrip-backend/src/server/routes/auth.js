@@ -26,6 +26,7 @@ router.get("/google/callback", passport.authenticate('google', {
     return res.json({"message": "success", user: req.user});
 });
 
+
 // router.get("/facebook", passport.authenticate("facebook"), async (req, res, next) => {
 //     if (!req.body.email || !req.body.password) {
 //         return next(new Error("Invalid body!"));

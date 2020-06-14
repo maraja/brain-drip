@@ -25,6 +25,15 @@ export default class BrainDripService {
     }
 
 
+    // AUTH
+    static async loginUser({ email, password }) {
+        const body = await got.post(`${BRAINDRIP_BACKEND_URI}/users/login`, {
+            json: { email, password }
+        }).json();
+        return body;
+    }
+
+
     // LEARNING PATHS
     static async fetchLearningPaths() {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path`).json();

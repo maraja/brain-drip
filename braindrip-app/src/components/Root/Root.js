@@ -10,6 +10,7 @@ import Home from "./Home";
 import LearningPaths from "./LearningPath/LearningPathList";
 import LearningPathDetails from "./LearningPath/LearningPathDetails";
 import UserHome from "./UserHome";
+import LearningPaths from "./LearningPath/LearningPaths";
 
 // import 'antd/dist/antd.css'
 import "./app.less";
@@ -42,37 +43,50 @@ const query = gql`
   }
 `;
 
-
-const LearningPaths2 = () => {
-  const { data, loading, refetch } = useQuery(query);
-
-  if (loading || !data) return "Loading...";
-
+function About() {
   return (
     <Wrapper>
-      <div>
-        {data.user_list.map((user) => (
-          <div key={user.id}>
-            <h2 className="text-gray-500">{user.firstName}</h2>
-            <h4>{user.lastName}</h4>
-            {user.learningPaths &&
-              user.learningPaths.map((lp) => (
-                <div key={lp.id}>
-                  <h2>{lp.name}</h2>
-                  <h4>{lp.description}</h4>
-                </div>
-              ))}
-          </div>
-        ))}
-      </div>
-      {/* <AddListing
-            onAddListing={() => {
-            refetch();
-            }}
-        /> */}
+      <Container>
+        <h1>This is my about page.</h1>
+        <Button type="primary" htmlType="submit">
+          确定
+        </Button>
+      </Container>
+      {/* <LearningPaths /> */}
     </Wrapper>
   );
-};
+}
+
+// const LearningPaths = () => {
+//   const { data, loading, refetch } = useQuery(query);
+
+//   if (loading || !data) return "Loading...";
+
+//   return (
+//     <Wrapper>
+//       <div>
+//         {data.user_list.map((user) => (
+//           <div key={user.id}>
+//             <h2 className="text-gray-500">{user.firstName}</h2>
+//             <h4>{user.lastName}</h4>
+//             {user.learningPaths &&
+//               user.learningPaths.map((lp) => (
+//                 <div key={lp.id}>
+//                   <h2>{lp.name}</h2>
+//                   <h4>{lp.description}</h4>
+//                 </div>
+//               ))}
+//           </div>
+//         ))}
+//       </div>
+//       {/* <AddListing
+//             onAddListing={() => {
+//             refetch();
+//             }}
+//         /> */}
+//     </Wrapper>
+//   );
+// };
 
 function Root() {
   return (
