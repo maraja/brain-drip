@@ -7,8 +7,10 @@ const { User, Favorites, LearningPath, LearningPathResource } = db;
 const createLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
-    const { name, description, tags, difficulty, userId } = req.body;
     try {
+        const user = await User.findAll(); // Replace with authenticated user
+        const { name, description, tags, difficulty } = req.body;
+        const userId = user[0].id
         const newLearningPath = await LearningPath.create({
             id: generateUUID(),
             upVotes: 0,
@@ -20,7 +22,8 @@ const createLearningPath = async (req, res, next) => {
             message: "Learning Path Successfully created.",
             newLearningPath
         });
-    } catch(e) {
+    } catch (e) {
+        console.debug(e);
         return next(e);
     }
 }
@@ -28,7 +31,7 @@ const createLearningPath = async (req, res, next) => {
 
 // (async () => {
 //     await LearningPath.create({
-        
+
 //     })
 // })()
 
@@ -41,7 +44,7 @@ const updateLearningPath = async (req, res, next) => {
     try {
         const learningPath = await LearningPath.update({
             name, description, tags, difficulty, upVotes, downVotes
-        }, { 
+        }, {
             where: { id: id, userId: userId },
             returning: true,
             plain: true
@@ -50,7 +53,7 @@ const updateLearningPath = async (req, res, next) => {
             success: true,
             message: `Learning Path Successfully updated.`
         });
-    } catch(e) {
+    } catch (e) {
         return next(e);
     }
 }
@@ -61,14 +64,14 @@ const deleteLearningPath = async (req, res, next) => {
     const { id, userId } = req.body;
 
     try {
-        const learningPath = await LearningPath.destroy( { 
+        const learningPath = await LearningPath.destroy({
             where: { id: id, userId: userId },
         })
         return res.json({
             success: true,
             message: `Learning Path Successfully deleted.`
         });
-    } catch(e) {
+    } catch (e) {
         return next(e);
     }
 }
@@ -79,22 +82,58 @@ const getLearningPathById = async (req, res, next) => {
             subQuery: false,
             include: [
                 {
-                    model: User,
-                    as: 'user'
-                }, {
                     model: LearningPathResource,
                     as: 'learningPathResources'
                 }
-            ],  
+            ],
+            order: [
+                [db.Sequelize.col('sequenceNumber'), 'ASC'],
+            ],
             // the following two will flatten and spit out only a json
             nest: true,
         });
 
         if (!learningPath) return next(new Error("Invalid learning path ID"))
-        
+
         return res.json({
             message: "Successfully retrieved learning path.",
             learningPath
+        });
+    } catch (e) {
+        return next(e);
+    }
+}
+
+const getLearningPathsByUserId = async (req, res, next) => {
+    try {
+        const user = await User.findAll(); // Replace with authenticated user
+        const learningPaths = await LearningPath.findAll({
+            where: {
+                userId: user[0].id
+            },
+            order: [['updatedAt', 'DESC']]
+        });
+
+        if (!learningPaths) return next(new Error("Invalid learning path ID"))
+
+        return res.json({
+            message: "Successfully retrieved learning paths.",
+            learningPaths
+        });
+    } catch (e) {
+        return next(e);
+    }
+}
+
+const getLearningPaths = async (req, res, next) => {
+    try {
+        const learningPaths = await LearningPath.findAll();
+
+        if (!learningPaths) return next(new Error("No learning paths found"))
+
+        return res.json({
+            message: "Successfully retrieved learning paths.",
+            learningPaths
         });
     } catch (e) {
         return next(e);
@@ -107,10 +146,10 @@ const searchLearningPathsByParams = async (req, res, next) => {
     // console.log(query)
 
     var whereStatement = {};
-    if(query.id) {
+    if (query.id) {
         whereStatement.id = query.id;
     }
-    if(query.search) {
+    if (query.search) {
         whereStatement.name = Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('name')), 'LIKE', `%${query.search}%`);
         // whereStatement.description = Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('description')), 'LIKE', `%${query.search}%`);
     }
@@ -127,20 +166,20 @@ const searchLearningPathsByParams = async (req, res, next) => {
                     model: LearningPathResource,
                     as: 'learningPathResources'
                 }
-            ],  
+            ],
             // the following two will flatten and spit out only a json
             nest: true,
         });
 
         if (!learningPaths) return next(new Error("No learning paths found"))
-        
+
         return res.json(learningPaths);
     } catch (e) {
         return next(e);
     }
 }
 
-const searchLearningPathsByString = async(req, res, next) => {
+const searchLearningPathsByString = async (req, res, next) => {
     let searchString = req.params.searchString;
     try {
         const learningPaths = await LearningPath.findAll({
@@ -156,13 +195,13 @@ const searchLearningPathsByString = async(req, res, next) => {
                     model: LearningPathResource,
                     as: 'learningPathResources'
                 }
-            ],  
+            ],
             // the following two will flatten and spit out only a json
             nest: true,
         });
 
         if (!learningPaths) return next(new Error("No learning paths found"))
-        
+
         return res.json(learningPaths);
     } catch (e) {
         return next(e);
@@ -171,10 +210,12 @@ const searchLearningPathsByString = async(req, res, next) => {
 
 
 export default {
-    getLearningPathById, 
-    createLearningPath, 
-    updateLearningPath, 
-    deleteLearningPath, 
-    searchLearningPathsByParams, 
+    getLearningPaths,
+    getLearningPathById,
+    getLearningPathsByUserId,
+    createLearningPath,
+    updateLearningPath,
+    deleteLearningPath,
+    searchLearningPathsByParams,
     searchLearningPathsByString
 };

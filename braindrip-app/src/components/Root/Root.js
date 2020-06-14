@@ -7,30 +7,13 @@ import { useQuery } from "react-apollo";
 import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
+import LearningPaths from "./LearningPath/LearningPathList";
+import LearningPathDetails from "./LearningPath/LearningPathDetails";
 import UserHome from "./UserHome";
 import LearningPaths from "./LearningPath/LearningPaths";
 
 // import 'antd/dist/antd.css'
 import "./app.less";
-
-import { Button } from "antd";
-
-const Container = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  margin: 0 auto;
-  width: 80rem;
-`;
-
-const Content = styled.div`
-  flex: 1;
-  margin-right: 1rem;
-`;
-
-const Sidebar = styled.div`
-  flex: 0 auto;
-  width: 10rem;
-`;
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -109,12 +92,12 @@ function Root() {
   return (
     <Switch>
       <Route path="/" component={Home} exact />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={Register} />
-      <Route path="/home" component={UserHome} />
-      <Route path="/about" component={About} />
-      <Route path="/learning-paths" component={LearningPaths} />
-      {/* <Route path="/shop" component={Shop} /> */}
+      <Route path="/login" component={Login} />{" "}
+      <Route path="/signup" component={Register} />{" "}
+      <Route path="/home" component={UserHome} />{" "}
+      <Route path="/learning-path/id/:id" component={LearningPathDetails} />{" "}
+      <Route path="/learning-path" component={LearningPaths} />{" "}
+      {/* <Route path="/shop" component={Shop} /> */}{" "}
     </Switch>
   );
 }

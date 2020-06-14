@@ -17,7 +17,6 @@ import {
 } from "antd";
 const { Text } = Typography;
 
-
 import SmallError from "#root/components/bd-components/SmallError"
 import SmallSuccess from "#root/components/bd-components/SmallSuccess"
 
