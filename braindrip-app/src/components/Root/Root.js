@@ -10,7 +10,7 @@ import Home from "./Home";
 import LearningPaths from "./LearningPath/LearningPathList";
 import LearningPathDetails from "./LearningPath/LearningPathDetails";
 import UserHome from "./UserHome";
-import LearningPaths from "./LearningPath/LearningPaths";
+// import LearningPaths from "./LearningPath/LearningPaths";
 
 // import 'antd/dist/antd.css'
 import "./app.less";

@@ -7,7 +7,7 @@ const formatGraphQLErrors = error => {
     // const fullError = _.get(error, "originalError.response.body.error.errors");
     console.log(errorDetails)
     try {
-        if (errorDetails) return JSON.parse(errorDetails);
+        if (errorDetails) return { ...JSON.parse(errorDetails), error: undefined};
         // else {
         //     errorDetails = error.errors[0]
         //     console.log(errorDetails)

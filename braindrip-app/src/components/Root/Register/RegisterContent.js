@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
 import gql from "graphql-tag";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -41,29 +41,28 @@ const SIGNUP_USER = gql`
 
 
 function RegisterContent() {
-  const [mutationSignup, { loading, data, error }] = useMutation(SIGNUP_USER)
+  // for some reason, there is a glitch with useMutation.
+  // you must override the onError callback to receive the error variable from the output.
+  const [mutationSignup, { loading, data, error }] = useMutation(SIGNUP_USER, {onError: () => null})
 
   const { user: reduxUser } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   const onFinish = async values => {
-    try {
-      let results = mutationSignup({ variables: values })
-    } catch (e) {
-      SmallError(e.message)
-    }
-    // console.log(data, loading, results)
+    console.log(data, loading, error)
+    let results = await mutationSignup({ variables: values })
+    // console.log(data, loading, error)
   }
 
   useEffect(() => {
-    console.log(loading, data, error)
+    console.log(data, loading, error)
     if (error) SmallError(error.message);
     else if (data) {
       SmallSuccess(data.createUser.message);
-      const { user } = data.createUser;
-      dispatch(signupUser(user));
+      const { newUser } = data.createUser;
+      dispatch(signupUser(newUser));
     }
-  }, [data])
+  }, [data, error])
 
   return (
     
