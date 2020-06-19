@@ -22,9 +22,9 @@ function Root() {
       <Route path="/login" component={Login} />{" "}
       <Route path="/signup" component={Register} />{" "}
       <Route path="/home" component={UserHome} />{" "}
+      <Route path="/learning-path" component={LearningPaths} exact />{" "}
       <Route path="/learning-path/search/:searchString" component={LearningPathsSearchResult} />{" "}
       <Route path="/learning-path/id/:id" component={LearningPathDetails} />{" "}
-      <Route path="/learning-path" component={LearningPaths} />{" "}
     </Switch>
   );
 }

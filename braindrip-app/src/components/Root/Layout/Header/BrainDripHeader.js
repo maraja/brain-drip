@@ -92,19 +92,19 @@ function BrainDripHeader() {
     const menu = (
       <Menu style={{ width: 256 }}>
         <Menu.Item key="edit">
-          <a href="/edit">Edit Profile</a>
+          <Link to='/edit'>Edit Profile</Link>
         </Menu.Item>
         <Menu.Item key="account">
-          <a href="/account">Account</a>
+          <Link to='/account'>Account</Link>
         </Menu.Item>
         <Menu.Item key="notifications">
-          <a href="/notifications">Notifications</a>
+          <Link to='/notifications'>Notifications</Link>
         </Menu.Item>
         <Menu.Item key="help">
-          <a href="/help">Help</a>
+          <Link to='/help'>Help</Link>
         </Menu.Item>
         <Menu.Item key="signout">
-          <a onClick={() => dispatch(logoutUser())}>Sign Out</a>
+          <Link onClick={() => dispatch(logoutUser())}>Sign Out</Link>
         </Menu.Item>
       </Menu>
     );
@@ -127,25 +127,25 @@ function BrainDripHeader() {
 
   return (
     <div className="header">
-        {/* Replace backgroundColor with proper theme */}
-        <Header style={{ height: '70px', padding: "0px 5%", backgroundColor: "white" }}>
-          <Row>
-            <Col span={18} order={1}>
-              <Logo />
-            </Col>
-            {/* <Col span={12} order={3}>
+      {/* Replace backgroundColor with proper theme */}
+      <Header style={{ height: '70px', padding: "0px 5%", backgroundColor: "white" }}>
+        <Row>
+          <Col span={18} order={1}>
+            <Logo />
+          </Col>
+          {/* <Col span={12} order={3}>
               <Search
                 style={{ verticalAlign: "middle" }}
                 placeholder="Search your path"
                 enterButton
               />
             </Col> */}
-            <Col span={6} order={4}>
-              <Space style={{ float: "right" }}>{headerRight}</Space>
-            </Col>
-          </Row>
-        </Header>
-      </div>
+          <Col span={6} order={4}>
+            <Space style={{ float: "right" }}>{headerRight}</Space>
+          </Col>
+        </Row>
+      </Header>
+    </div>
   )
 }
 
