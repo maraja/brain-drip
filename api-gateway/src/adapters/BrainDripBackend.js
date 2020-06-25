@@ -55,9 +55,9 @@ export default class BrainDripService {
         return body;
     }
 
-    static async createLearningPath({ name, description, tags, difficulty }) {
+    static async createLearningPath({ name, userId, description, tags, difficulty }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
-            json: { name, description, tags, difficulty }
+            json: { name, userId, description, tags, difficulty }
         }).json();
         return body;
     }

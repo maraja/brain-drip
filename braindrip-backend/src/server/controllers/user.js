@@ -53,7 +53,40 @@ const loginUser = async (req, res, next) => {
     const { email, password } = req.body;
   
       try {
-        let user = await User.findOne({ attributes: {}, where: { email } });
+        let user = await User.findOne({ 
+            attributes: {}, 
+            where: { email },
+            subQuery: false,
+            include: [
+                {
+                    // all:true,
+                    nested: true,
+                    model: Favorites,
+                    as: 'favorites',
+                    // required true will make it so that it will grab the first person
+                    // with at least 1 record
+                    // required: true,
+                    include: [
+                        {
+                            model: LearningPath,
+                            as: 'learningPath'
+                        }
+                    ]
+                }, {
+                    nested: true,
+                    model: LearningPath,
+                    as: 'learningPaths',
+                    include: [
+                        {
+                            model: LearningPathResource,
+                            as: 'learningPathResources'
+                        }
+                    ]
+                }
+            ], 
+            // the following two will flatten and spit out only a json
+            nest: true, 
+        });
   
         if (!user) return next(HE(400, "Invalid email!"));
 
