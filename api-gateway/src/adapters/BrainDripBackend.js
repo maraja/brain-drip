@@ -40,8 +40,8 @@ export default class BrainDripService {
         return body.learningPaths;
     }
     
-    static async fetchLearningPathsByUser() {
-        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/`).json();
+    static async fetchLearningPathsByUser({ userId }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/${userId}`).json();
         return body.learningPaths;
     }
     

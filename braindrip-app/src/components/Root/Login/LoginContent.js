@@ -21,23 +21,10 @@ import SmallError from "#root/components/bd-components/SmallError"
 import SmallSuccess from "#root/components/bd-components/SmallSuccess"
 
 import { loginUser } from "#root/actions/userActions"
+import { LOGIN_USER } from "#root/graphql/queries"
 
 const { Text } = Typography;
 // note REM units stand for relative to root element font-size.
-
-const LOGIN_USER = gql`
-    query userLogin($email: String!, $password: String!) {
-        userLogin(email: $email, password: $password) {
-          success
-          message
-          user {
-            id
-            firstName
-            lastName
-          }
-        }
-    }
-`;
 
 let email = ""
 let password = ""

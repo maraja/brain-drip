@@ -106,10 +106,10 @@ const getLearningPathById = async (req, res, next) => {
 
 const getLearningPathsByUserId = async (req, res, next) => {
     try {
-        const user = await User.findAll(); // Replace with authenticated user
+        // const user = await User.findAll(); // Replace with authenticated user
         const learningPaths = await LearningPath.findAll({
             where: {
-                userId: user[0].id
+                userId: req.params.userId
             },
             order: [['updatedAt', 'DESC']]
         });

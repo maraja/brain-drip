@@ -7,16 +7,7 @@ import { Link } from 'react-router-dom';
 import { AutoComplete } from 'antd';
 const { Option } = AutoComplete;
 
-
-const GET_LEARNING_PATHS = gql`
-    query getLearningPaths($searchString: String!) {
-        learningPathSearch(searchString: $searchString) {
-            id
-            name
-            description
-        }
-    }
-`;
+import { GET_LEARNING_PATHS } from "#root/graphql/queries"
 
 const AutoCompleteSearch = ({ width = '100%' }) => {
     const [searchString, setSearchString] = useState("")
@@ -31,8 +22,10 @@ const AutoCompleteSearch = ({ width = '100%' }) => {
     return (
         <AutoComplete
             style={{ width }}
+            autoFocus
             placeholder="Search for a learning path"
             onSearch={search}
+            // onChange={search}
         >
             {data && data.learningPathSearch.map(r => (
                 <Option key={r.id} value={r.name}>

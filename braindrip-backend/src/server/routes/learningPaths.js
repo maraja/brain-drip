@@ -23,7 +23,7 @@ router.get("/id/:learningPathId", getLearningPathById)
 
 router.get("/", getLearningPaths)
 
-router.get("/user", getLearningPathsByUserId)
+router.get("/user/:userId", getLearningPathsByUserId)
 
 router.get("/search", searchLearningPathsByParams)
 

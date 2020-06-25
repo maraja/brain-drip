@@ -182,7 +182,7 @@ const typeDefs = gql`
         userLogin(email: String!, password: String!): UserLoginResponse
         learningPath(id: String!): LearningPath
         learningPaths: [LearningPath]
-        userLearningPaths: [LearningPath]
+        userLearningPaths(userId: String!): [LearningPath]
         learningPathSearch(searchString: String!): [LearningPath]
         learningPathResource(id: String!): LearningPathResource
         learningBucket(id: String!): LearningBucket

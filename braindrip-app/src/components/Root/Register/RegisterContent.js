@@ -21,23 +21,7 @@ import SmallError from "#root/components/bd-components/SmallError"
 import SmallSuccess from "#root/components/bd-components/SmallSuccess"
 
 import { signupUser } from "#root/actions/userActions"
-
-
-const SIGNUP_USER = gql`
-    mutation createUser($email: String!, $password: String!, $firstName: String!, $lastName: String!) {
-        createUser(email: $email, password: $password, firstName: $firstName, lastName: $lastName) {
-          success
-          message
-          newUser {
-            id
-            email
-            firstName
-            lastName
-            profilePicture
-          }
-        }
-    }
-`;
+import { SIGNUP_USER } from "#root/graphql/mutations"
 
 
 function RegisterContent() {

@@ -1,5 +1,6 @@
 import React, { useState, useCallback, Component } from "react";
 import  { Redirect } from 'react-router-dom'
+import { useSelector } from "react-redux";
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 
@@ -9,31 +10,15 @@ const { Content } = Layout;
 const { Title } = Typography;
 const { TextArea } = Input;
 
-const LearningPaths = (props) => {
-  const CREATE_LEARNING_PATH = gql`
-    mutation(
-      $name: String!
-      $description: String!
-      $tags: String!
-      $difficulty: String!
-    ) {
-      createLearningPath(
-        name: $name
-        description: $description
-        tags: $tags
-        difficulty: $difficulty
-      ) {
-        newLearningPath {
-          id
-          name
-          description
-        }
-      }
-    }
-  `;
+import { CREATE_LEARNING_PATH } from "#root/graphql/mutations"
 
-  const [createLearningPath, { data }] = useMutation(CREATE_LEARNING_PATH);
+const LearningPaths = (props) => {
+
+  const [newData, setNewData] = useState(false)
+  const [createLearningPath, { data }] = useMutation(CREATE_LEARNING_PATH, { onCompleted: (data) => setNewData(true) });
   const [visible, setVisible] = useState(false);
+  const { user } = useSelector(state => state.user);
+
 
 
   if (data) {
@@ -41,13 +26,15 @@ const LearningPaths = (props) => {
   }
 
   const onCreate = (values) => {
+    console.log("user", user)
     createLearningPath({
       variables: {
+        userId: user.id, 
         name: values.name,
         description: values.description,
         tags: values.tags,
         difficulty: values.difficulty,
-      },
+      }
     });
     setVisible(false);
   };
@@ -132,7 +119,7 @@ const LearningPaths = (props) => {
           </a>
         }
       >
-        <LearningPathContent isUser={true} />
+        <LearningPathContent newData={newData} />
       </Card>
     </Content>
   );

@@ -5,26 +5,12 @@ import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Typography, Divider } from "antd";
 
+import { GET_LEARNING_PATH_DETAIL } from "#root/graphql/queries"
+
+// console.log(GET_LEARNING_PATH_DETAIL)
+
 const { Title, Text, Paragraph } = Typography;
 
-const GET_LEARNING_PATH_DETAIL = gql`
-  query getLearningPath($id: String!) {
-    learningPath(id: $id) {
-      id
-      name
-      description
-      difficulty
-      learningPathResources {
-        id
-        url
-        type
-        topic
-        description
-        sequenceNumber
-      }
-    }
-  }
-`;
 
 const LearningPathDetails = ({ id, rowSpan = 8 }) => {
   const { data, loading, error } = useQuery(GET_LEARNING_PATH_DETAIL, {
@@ -33,7 +19,7 @@ const LearningPathDetails = ({ id, rowSpan = 8 }) => {
   if (loading) return <Paragraph>Loading ...</Paragraph>;
   if (data)
     return (
-      <div className="site-card-wrapper">
+      <>
         <Col span={16} offset={4}>
           <Title level={3}>
             {data.learningPath.name}({data.learningPath.difficulty})
@@ -60,7 +46,7 @@ const LearningPathDetails = ({ id, rowSpan = 8 }) => {
               </Col>
             ))}
         </Row>
-      </div>
+      </>
     );
 };
 

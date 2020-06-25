@@ -1,44 +1,32 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 
 import { Card, Row, Col, Typography } from "antd";
 
+import { GET_LEARNING_PATHS_BY_USER, GET_LEARNING_PATHS_ALL } from "#root/graphql/queries"
+
 const { Paragraph } = Typography;
 
-const GET_LEARNING_PATHS = gql`
-  {
-    learningPaths {
-      id
-      name
-      description
-      difficulty
-    }
-  }
-`;
 
-const GET_LEARNING_PATHS_BY_USER = gql`
-  {
-    userLearningPaths {
-      id
-      name
-      description
-      difficulty
-    }
-  }
-`;
-
-const LearningPathList = ({ isUser = false, rowSpan = 8 }) => {
-  const { data, loading, error } = useQuery(
-    isUser ? GET_LEARNING_PATHS_BY_USER : GET_LEARNING_PATHS
-  );
+const LearningPathList = ({ newData, isUser = false, rowSpan = 8 }) => {
+  const { user } = useSelector(state => state.user);
+  const { data, loading, error, refetch } = user.id ? 
+    useQuery(GET_LEARNING_PATHS_BY_USER, {variables: {userId: user.id}}) : 
+    useQuery(GET_LEARNING_PATHS_ALL)
 
   if (loading) return <Paragraph>Loading ...</Paragraph>;
-  if (data && isUser) {
+  if (data && user.id) {
     data.learningPaths = data.userLearningPaths;
   }
+
+  if (newData) {
+    refetch();
+  }
+
   return (
     <div className="site-card-wrapper">
       <Row>
