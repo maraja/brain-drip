@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import gql from "graphql-tag";
-import { useQuery, useMutation } from "react-apollo";
+import { useQuery, useMutation } from "@apollo/client";
 import { Link } from 'react-router-dom';
 
 import { AutoComplete } from 'antd';

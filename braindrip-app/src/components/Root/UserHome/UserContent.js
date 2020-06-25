@@ -1,29 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import UserNavigation from "./UserNavigation";
-import { Layout, Input, Row, Col, Divider, Typography } from "antd";
-const { Content } = Layout;
+import { Typography } from "antd";
 const { Title } = Typography;
 
-class UserContent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+const UserContent = () => {
 
-  render() {
-    return (
-      <Content>
-        <Row type="flex" align="middle">
-          <Col span={16} offset={4}>
-            <Title level={2}>My BrainDrip</Title>
-          </Col>
-          <Col span={16} offset={4}>
-            <UserNavigation/>
-          </Col>
-        </Row>
-      </Content>
-    );
-  }
+  return (
+    <>
+      <Title level={2}>My BrainDrip</Title>
+      <UserNavigation />
+    </>
+  );
 }
+
 
 export default UserContent;

@@ -1,8 +1,7 @@
 import React, { useState, useCallback, Component } from "react";
 import  { Redirect } from 'react-router-dom'
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
-import { useQuery } from "react-apollo";
 
 import LearningPathContent from "#root/components/bd-components/LearningPathList.js";
 import { Layout, Card, Typography, Modal, Form, Input, Radio } from "antd";
@@ -33,7 +32,7 @@ const LearningPaths = (props) => {
     }
   `;
 
-  const [addLearningPath, { data }] = useMutation(CREATE_LEARNING_PATH);
+  const [createLearningPath, { data }] = useMutation(CREATE_LEARNING_PATH);
   const [visible, setVisible] = useState(false);
 
 
@@ -42,7 +41,7 @@ const LearningPaths = (props) => {
   }
 
   const onCreate = (values) => {
-    addLearningPath({
+    createLearningPath({
       variables: {
         name: values.name,
         description: values.description,
