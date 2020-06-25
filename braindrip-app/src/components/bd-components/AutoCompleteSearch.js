@@ -36,7 +36,7 @@ const AutoCompleteSearch = ({ width = '100%' }) => {
         >
             {data && data.learningPathSearch.map(r => (
                 <Option key={r.id} value={r.name}>
-                    <Link to={`learning-path/id/${r.id}`}>{r.name}</Link>
+                    <Link to={`learning-path/id/${r.id}`} className="search-item">{r.name}</Link>
                 </Option>
             ))}
         </AutoComplete>

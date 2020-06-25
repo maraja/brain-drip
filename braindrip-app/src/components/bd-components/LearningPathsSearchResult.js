@@ -9,44 +9,30 @@ import { Card, Row, Col, Typography } from "antd";
 const { Paragraph } = Typography;
 
 const GET_LEARNING_PATHS = gql`
-  {
-    learningPaths {
-      id
-      name
-      description
-      difficulty
+    query getLearningPaths($searchString: String!) {
+        learningPathSearch(searchString: $searchString) {
+            id
+            name
+            description
+        }
     }
-  }
 `;
 
-const GET_LEARNING_PATHS_BY_USER = gql`
-  {
-    userLearningPaths {
-      id
-      name
-      description
-      difficulty
-    }
-  }
-`;
 
-const LearningPathList = ({ isUser = false, rowSpan = 8 }) => {
-  const { data, loading, error } = useQuery(
-    isUser ? GET_LEARNING_PATHS_BY_USER : GET_LEARNING_PATHS
-  );
+const LearningPathList = ({ searchString, rowSpan = 8 }) => {
 
+  const { data, loading, error } = useQuery(GET_LEARNING_PATHS, { variables: { searchString } })
   if (loading) return <Paragraph>Loading ...</Paragraph>;
-  if (data && isUser) {
-    data.learningPaths = data.userLearningPaths;
-  }
+  console.log(searchString)
+
   return (
     <div className="site-card-wrapper">
       <Row>
         {data &&
-          data.learningPaths.map((r) => (
+          data.learningPathSearch.map((r) => (
             <Col key={r.id} span={rowSpan}>
               <Card
-                title={r.name}       
+                title={r.name}
                 extra={<Link to={`/learning-path/id/${r.id}`}>Details</Link>}
               >
                 {r.description}
