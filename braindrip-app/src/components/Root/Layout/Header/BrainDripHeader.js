@@ -27,6 +27,7 @@ import { logoutUser } from "#root/actions/userActions";
 import { Button } from "antd";
 
 let userId = ""
+const MAX_LP_TO_SHOW = 10
 
 function BrainDripHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,17 +35,9 @@ function BrainDripHeader() {
   const dispatch = useDispatch();
 
   // const [learningPaths, setLearningPaths] = useState([]);
-  const [_fetchPaths, { loading, learningPaths, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, {variables: {userId}})
+  const [fetchPaths, { loading, data, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, {variables: {userId: user ? user.id : ""}})
 
   let headerRight;
-
-
-  const fetchPaths = (e) => {
-    e.preventDefault();
-    console.log(user)
-    userId = user.id
-    _fetchPaths()
-  }
 
   useEffect(() => {
     console.log(isLoggedIn)
@@ -64,11 +57,17 @@ function BrainDripHeader() {
   } else {
     const paths = (
       <Menu style={{ width: 256 }}>
-        {learningPaths && learningPaths.map(function (p, idx) {
+        {data && data.userLearningPaths.slice(0, MAX_LP_TO_SHOW).map(function (p, idx) {
           return (
-            <>{p.name}</>
+            <Menu.Item key={idx}>
+              <Link to={`/learning-path/id/${p.id}`}>{p.name}</Link>
+            </Menu.Item>
           );
         })}
+        <Menu.Divider />
+        <Menu.Item>
+          <Link to={`/user/learning-paths`}>View All</Link>
+        </Menu.Item>
       </Menu>
     );
     const menu = (
