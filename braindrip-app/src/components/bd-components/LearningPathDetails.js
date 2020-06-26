@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Typography, Divider } from "antd";
+import LearningPathLarge from "#root/components/bd-components/views/LearningPathLarge"
 
 import { GET_LEARNING_PATH_DETAIL } from "#root/graphql/queries"
 
@@ -19,34 +20,7 @@ const LearningPathDetails = ({ id, rowSpan = 8 }) => {
   if (loading) return <Paragraph>Loading ...</Paragraph>;
   if (data)
     return (
-      <>
-        <Col span={16} offset={4}>
-          <Title level={3}>
-            {data.learningPath.name}({data.learningPath.difficulty})
-          </Title>
-
-          <Text>{data.learningPath.description}</Text>
-        </Col>
-        <Divider />
-        <Row>
-          {data.learningPath &&
-            data.learningPath.learningPathResources.map((r) => (
-              <Col key={r.id} span={rowSpan}>
-                <Card
-                  title={`${r.type}: ${r.topic}`}
-                  extra={
-                    <a href={r.url} target="blank_">
-                      Resource
-                    </a>
-                  }
-                >
-                  {r.sequenceNumber} <br />
-                  {r.description}
-                </Card>
-              </Col>
-            ))}
-        </Row>
-      </>
+      <LearningPathLarge learningPath={data.learningPath} />
     );
 };
 

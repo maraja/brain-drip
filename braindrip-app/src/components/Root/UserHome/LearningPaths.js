@@ -5,12 +5,15 @@ import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 
 import LearningPathContent from "#root/components/bd-components/LearningPathList.js";
-import { Layout, Card, Typography, Modal, Form, Input, Radio } from "antd";
-const { Content } = Layout;
+import Layout from "#root/components/Root/Layout";
+import Container from "#root/components/bd-components/Container.js";
+import { Card, Typography, Modal, Form, Input, Radio, Button } from "antd";
 const { Title } = Typography;
 const { TextArea } = Input;
 
 import { CREATE_LEARNING_PATH } from "#root/graphql/mutations"
+
+const difficulties = ['beginner', 'intermediate', 'advanced']
 
 const LearningPaths = (props) => {
 
@@ -41,7 +44,8 @@ const LearningPaths = (props) => {
 
   const [form] = Form.useForm();
   return (
-    <Content>
+    <Layout>
+    <Container>
       <Modal
         title="New Learning Path"
         style={{ top: 20 }}
@@ -103,25 +107,18 @@ const LearningPaths = (props) => {
           </Form.Item>
           <Form.Item name="difficulty">
             <Radio.Group>
-              <Radio.Button value="beginner">Beginner</Radio.Button>
-              <Radio.Button value="intermediate">Intermediate</Radio.Button>
-              <Radio.Button value="advanced">Advanced</Radio.Button>
+              {difficulties.map(d => ( <Radio.Button value={d}>{d}</Radio.Button> ))}
             </Radio.Group>
           </Form.Item>
         </Form>
       </Modal>
 
-      <Card
-        title="My Learning Paths"
-        extra={
-          <a onClick={() => setVisible(true)} href="#">
-            New
-          </a>
-        }
-      >
+      <h1>My Learning Paths</h1>
+      <Button type="primary" onClick={() => setVisible(true)} >+ Create Learning Path</Button>
+
         <LearningPathContent newData={newData} />
-      </Card>
-    </Content>
+    </Container>
+    </Layout>
   );
 };
 

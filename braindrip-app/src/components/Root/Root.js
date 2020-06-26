@@ -8,9 +8,12 @@ import Register from "./Register";
 import Home from "./Home";
 import LearningPaths from "./LearningPath/LearningPathList";
 import LearningPathDetails from "./LearningPath/LearningPathDetails";
+import LearningPathEdit from "./LearningPath/LearningPathEdit";
 import LearningPathsSearchResult from "./LearningPath/LearningPathsSearchResult";
 import UserHome from "./UserHome";
 import UserLearningPaths from "./UserHome/LearningPaths";
+
+import NotFound from '#root/components/bd-components/views/NotFound'
 // import LearningPaths from "./LearningPath/LearningPaths";
 
 // import 'antd/dist/antd.css'
@@ -24,12 +27,14 @@ function Root() {
       <Route path="/signup" component={Register} />{" "}
       <Route path="/home" component={UserHome} />{" "}
 
-      <Route path="/user/learning-path" component={UserLearningPaths} />{" "}
+      <Route path="/user/learning-paths" component={UserLearningPaths} />{" "}
 
 
       <Route path="/learning-path" component={LearningPaths} exact />{" "}
       <Route path="/learning-path/search/:searchString" component={LearningPathsSearchResult} />{" "}
       <Route path="/learning-path/id/:id" component={LearningPathDetails} />{" "}
+      <Route path="/learning-path/edit/:id" component={LearningPathEdit} />{" "}
+      <Route component={NotFound} />
     </Switch>
   );
 }
