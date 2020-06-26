@@ -31,7 +31,7 @@ const typeDefs = gql`
         id: ID!
         name: String!
         description: String!
-        tags: [String!]
+        # tags: [String]!
         difficulty: Difficulty!
         upVotes: Int!
         downVotes: Int!
@@ -51,7 +51,7 @@ const typeDefs = gql`
         id: ID!
         name: String!
         description: String!
-        tags: [String!]
+        # tags: [String]!
         learningBucketResources: [LearningBucketResource]
     }
 
@@ -101,8 +101,8 @@ const typeDefs = gql`
     }
 
     type LearningPathCreateResponse {
-        success: Boolean
-        message: String
+        success: Boolean!
+        message: String!
         newLearningPath: LearningPath
     }
 
@@ -145,7 +145,7 @@ const typeDefs = gql`
     type Mutation {
         createUser(email: String!, password: String!, firstName: String!, lastName: String!): UserCreateResponse
 
-        createLearningPath(name: String!, description: String!, difficulty: String!, tags: String!): LearningPathCreateResponse
+        createLearningPath(name: String!, userId: String!, description: String!, difficulty: String!, tags: String!): LearningPathCreateResponse
         updateLearningPath(id: String!, name: String, description: String, difficulty: String, tags: String, userId: String!): Response
         deleteLearningPath(id: String!, userId: String!): Response
 
@@ -182,7 +182,7 @@ const typeDefs = gql`
         userLogin(email: String!, password: String!): UserLoginResponse
         learningPath(id: String!): LearningPath
         learningPaths: [LearningPath]
-        userLearningPaths: [LearningPath]
+        userLearningPaths(userId: String!): [LearningPath]
         learningPathSearch(searchString: String!): [LearningPath]
         learningPathResource(id: String!): LearningPathResource
         learningBucket(id: String!): LearningBucket

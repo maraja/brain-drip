@@ -16,19 +16,35 @@ const { Meta } = Card;
 import { UserOutlined, DownOutlined } from "@ant-design/icons";
 const { Header } = Layout;
 const { Search } = Input;
-import logo from "#root/logo.png";
 import Logo from "#root/components/bd-components/Logo";
+import { useLazyQuery } from "@apollo/client";
+
+
+import { GET_LEARNING_PATHS_BY_USER } from "#root/graphql/queries"
 
 import { logoutUser } from "#root/actions/userActions";
 
 import { Button } from "antd";
+
+let userId = ""
 
 function BrainDripHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
+  // const [learningPaths, setLearningPaths] = useState([]);
+  const [_fetchPaths, { loading, learningPaths, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, {variables: {userId}})
+
   let headerRight;
+
+
+  const fetchPaths = (e) => {
+    e.preventDefault();
+    console.log(user)
+    userId = user.id
+    _fetchPaths()
+  }
 
   useEffect(() => {
     console.log(isLoggedIn)
@@ -46,45 +62,11 @@ function BrainDripHeader() {
       </>
     );
   } else {
-    const data = [
-      {
-        author: "Jose Portilla",
-        title: "The Complete SQL Guide 2020",
-        img: "https://img-a.udemycdn.com/course/240x135/762616_7693_3.jpg",
-        path: "/path",
-      },
-      {
-        author: "Chris Haroun",
-        title: "The Complete Financial Analyst Path",
-        img: "https://img-a.udemycdn.com/course/480x270/637930_9a22_19.jpg",
-        path: "/path",
-      },
-      {
-        author: "Kirill Eremenko",
-        title: "Beginner to Pro in Excel 2020",
-        img: "https://img-a.udemycdn.com/course/240x135/321410_d9c5_4.jpg",
-        path: "/path",
-      },
-      {
-        author: "Joseph Phillips",
-        title: "Tableau 2020 A-Z:Hands-On Tableau",
-        img: "https://img-a.udemycdn.com/course/240x135/937678_abd2_2.jpg",
-        path: "/path",
-      },
-    ];
     const paths = (
       <Menu style={{ width: 256 }}>
-        {data.map(function (data, idx) {
+        {learningPaths && learningPaths.map(function (p, idx) {
           return (
-            <Menu.Item key={idx}>
-              <Card style={{}}>
-                <Meta
-                  avatar={<Avatar shape="square" src={data.img} />}
-                  title={data.title}
-                  description={data.author}
-                />
-              </Card>
-            </Menu.Item>
+            <>{p.name}</>
           );
         })}
       </Menu>
@@ -110,10 +92,13 @@ function BrainDripHeader() {
     );
     headerRight = (
       <>
-        <Dropdown overlay={paths}>
+        <Dropdown 
+        overlay={paths}
+        trigger={['click']}
+        >
           <a
             className="ant-dropdown-link"
-            onClick={(e) => e.preventDefault()}
+            onClick={fetchPaths}
           >
             My paths <DownOutlined />
           </a>

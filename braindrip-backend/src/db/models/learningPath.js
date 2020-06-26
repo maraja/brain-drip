@@ -17,10 +17,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         type: DataTypes.TEXT
     },
-    tags: {
-        allowNull: true,
-        type: DataTypes.STRING
-    },
     difficulty: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -52,6 +48,7 @@ module.exports = function(sequelize, DataTypes) {
   LearningPath.associate = function(models) {
     this.hasMany(models.LearningPathResource, { as: 'learningPathResources' });
     this.hasMany(models.Favorites, { as: 'favorites' });
+    this.hasMany(models.Tags, { as: 'tags'} );
     this.belongsTo(models.User, {
         foreignKey: 'userId',
         as: 'user'

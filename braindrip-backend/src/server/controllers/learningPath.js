@@ -9,13 +9,13 @@ const createLearningPath = async (req, res, next) => {
 
     try {
         const user = await User.findAll(); // Replace with authenticated user
-        const { name, description, tags, difficulty } = req.body;
-        const userId = user[0].id
+        const { name, description, tags, difficulty, userId } = req.body;
+        const user_id = userId || user[0].id
         const newLearningPath = await LearningPath.create({
             id: generateUUID(),
             upVotes: 0,
             downVotes: 0,
-            name, description, tags, difficulty, userId
+            name, description, tags, difficulty, userId: user_id
         })
         return res.json({
             success: true,
@@ -106,10 +106,10 @@ const getLearningPathById = async (req, res, next) => {
 
 const getLearningPathsByUserId = async (req, res, next) => {
     try {
-        const user = await User.findAll(); // Replace with authenticated user
+        // const user = await User.findAll(); // Replace with authenticated user
         const learningPaths = await LearningPath.findAll({
             where: {
-                userId: user[0].id
+                userId: req.params.userId
             },
             order: [['updatedAt', 'DESC']]
         });

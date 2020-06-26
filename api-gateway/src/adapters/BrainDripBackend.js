@@ -40,8 +40,8 @@ export default class BrainDripService {
         return body.learningPaths;
     }
     
-    static async fetchLearningPathsByUser() {
-        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/`).json();
+    static async fetchLearningPathsByUser({ userId }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/${userId}`).json();
         return body.learningPaths;
     }
     
@@ -55,9 +55,9 @@ export default class BrainDripService {
         return body;
     }
 
-    static async createLearningPath({ name, description, tags, difficulty }) {
+    static async createLearningPath({ name, userId, description, tags, difficulty }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
-            json: { name, description, tags, difficulty }
+            json: { name, userId, description, tags, difficulty }
         }).json();
         return body;
     }

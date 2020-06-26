@@ -1,39 +1,27 @@
 import React, { useState, useCallback, Component } from "react";
 import  { Redirect } from 'react-router-dom'
+import { useSelector } from "react-redux";
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
 
 import LearningPathContent from "#root/components/bd-components/LearningPathList.js";
-import { Layout, Card, Typography, Modal, Form, Input, Radio } from "antd";
-const { Content } = Layout;
+import Layout from "#root/components/Root/Layout";
+import Container from "#root/components/bd-components/Container.js";
+import { Card, Typography, Modal, Form, Input, Radio, Button } from "antd";
 const { Title } = Typography;
 const { TextArea } = Input;
 
-const LearningPaths = (props) => {
-  const CREATE_LEARNING_PATH = gql`
-    mutation(
-      $name: String!
-      $description: String!
-      $tags: String!
-      $difficulty: String!
-    ) {
-      createLearningPath(
-        name: $name
-        description: $description
-        tags: $tags
-        difficulty: $difficulty
-      ) {
-        newLearningPath {
-          id
-          name
-          description
-        }
-      }
-    }
-  `;
+import { CREATE_LEARNING_PATH } from "#root/graphql/mutations"
 
-  const [createLearningPath, { data }] = useMutation(CREATE_LEARNING_PATH);
+const difficulties = ['beginner', 'intermediate', 'advanced']
+
+const LearningPaths = (props) => {
+
+  const [newData, setNewData] = useState(false)
+  const [createLearningPath, { data }] = useMutation(CREATE_LEARNING_PATH, { onCompleted: (data) => setNewData(true) });
   const [visible, setVisible] = useState(false);
+  const { user } = useSelector(state => state.user);
+
 
 
   if (data) {
@@ -41,20 +29,23 @@ const LearningPaths = (props) => {
   }
 
   const onCreate = (values) => {
+    console.log("user", user)
     createLearningPath({
       variables: {
+        userId: user.id, 
         name: values.name,
         description: values.description,
         tags: values.tags,
         difficulty: values.difficulty,
-      },
+      }
     });
     setVisible(false);
   };
 
   const [form] = Form.useForm();
   return (
-    <Content>
+    <Layout>
+    <Container>
       <Modal
         title="New Learning Path"
         style={{ top: 20 }}
@@ -116,25 +107,18 @@ const LearningPaths = (props) => {
           </Form.Item>
           <Form.Item name="difficulty">
             <Radio.Group>
-              <Radio.Button value="beginner">Beginner</Radio.Button>
-              <Radio.Button value="intermediate">Intermediate</Radio.Button>
-              <Radio.Button value="advanced">Advanced</Radio.Button>
+              {difficulties.map(d => ( <Radio.Button value={d}>{d}</Radio.Button> ))}
             </Radio.Group>
           </Form.Item>
         </Form>
       </Modal>
 
-      <Card
-        title="My Learning Paths"
-        extra={
-          <a onClick={() => setVisible(true)} href="#">
-            New
-          </a>
-        }
-      >
-        <LearningPathContent isUser={true} />
-      </Card>
-    </Content>
+      <h1>My Learning Paths</h1>
+      <Button type="primary" onClick={() => setVisible(true)} >+ Create Learning Path</Button>
+
+        <LearningPathContent newData={newData} />
+    </Container>
+    </Layout>
   );
 };
 
