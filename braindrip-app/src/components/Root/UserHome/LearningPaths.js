@@ -29,7 +29,6 @@ const LearningPaths = (props) => {
   }
 
   const onCreate = (values) => {
-    console.log("user", user)
     createLearningPath({
       variables: {
         userId: user.id,
