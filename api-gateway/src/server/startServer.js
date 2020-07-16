@@ -17,6 +17,9 @@ const apolloServer = new ApolloServer({
     // we need this to access cookies.
     context: a => a,
     formatError: formatGraphQLErrors,
+    // engine: {
+    //     rewriteError: formatGraphQLErrors
+    // },
     resolvers, 
     typeDefs
 })

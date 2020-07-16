@@ -9,7 +9,7 @@ const client = new ApolloClient({
     link: new HttpLink({
         credentials: "include",
         uri: process.env.BRAINDRIP_URI + '/graphql'
-    })
+    }),
 });
 
 export default client;

@@ -43,10 +43,9 @@ new OpenApiValidator({
     setupPassport(passport);
 
     app.use((err, req, res, next) => {
-        // console.log(err)
         let formattedError = formatSequelizeError(err)
         let statusCode = err.status || 500;
-        return res.status(statusCode).json({message: formattedError.message || err.message, success: false, error: err})
+        return res.status(statusCode).json({error: formattedError, success: false})
     });
 
     app.listen(PORT, "0.0.0.0", () => {

@@ -9,6 +9,7 @@ import Home from "./Home";
 import LearningPaths from "./LearningPath/LearningPathList";
 import LearningPathDetails from "./LearningPath/LearningPathDetails";
 import LearningPathEdit from "./LearningPath/LearningPathEdit";
+import LearningPathCreate from "./LearningPath/LearningPathCreate";
 import LearningPathsSearchResult from "./LearningPath/LearningPathsSearchResult";
 import UserHome from "./UserHome";
 import UserLearningPaths from "./UserHome/LearningPaths";
@@ -34,6 +35,7 @@ function Root() {
       <Route path="/learning-path/search/:searchString" component={LearningPathsSearchResult} />{" "}
       <Route path="/learning-path/id/:id" component={LearningPathDetails} />{" "}
       <Route path="/learning-path/edit/:id" component={LearningPathEdit} />{" "}
+      <Route path="/learning-path/create" component={LearningPathCreate} />{" "}
       <Route component={NotFound} />
     </Switch>
   );

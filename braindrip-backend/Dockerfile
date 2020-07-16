@@ -6,4 +6,4 @@ WORKDIR /opt/app/braindrip-backend
 
 RUN yarn
 
-CMD yarn watch
+CMD yarn db:init yarn watch

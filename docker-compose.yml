@@ -1,7 +1,9 @@
 version: "3"
 services:
     api-gateway:
-        build: "./api-gateway"
+        build:
+            context: ./
+            dockerfile: ./api-gateway/Dockerfile
         depends_on:
             - braindrip-backend
         environment:
@@ -12,7 +14,9 @@ services:
             - ./api-gateway:/opt/app
 
     braindrip-backend:
-        build: "./braindrip-backend"
+        build:
+            context: ./
+            dockerfile: ./braindrip-backend/Dockerfile
         depends_on:
             - braindrip-backend-db
         environment:
