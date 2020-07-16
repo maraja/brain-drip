@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback, Component } from "react";
-import  { Redirect } from 'react-router-dom'
+import React, { useState, useCallback, Component } from "react";
+import { Redirect } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import { useMutation } from "@apollo/client";
 import gql from "graphql-tag";
@@ -30,10 +30,9 @@ const LearningPaths = (props) => {
   }
 
   const onCreate = (values) => {
-    console.log("user", user)
     createLearningPath({
       variables: {
-        userId: user.id, 
+        userId: user.id,
         name: values.name,
         description: values.description,
         tags: values.tags,
@@ -59,8 +58,7 @@ const LearningPaths = (props) => {
 
   const [form] = Form.useForm();
   return (
-    <Layout>
-    <Container>
+    <>
       <Modal
         title="Create a New Learning Path"
         style={{ top: 20 }}
@@ -84,9 +82,8 @@ const LearningPaths = (props) => {
       <h1>My Learning Paths</h1>
       <Button type="primary" onClick={() => setVisible(true)} >+ Create Learning Path</Button>
 
-        <LearningPathContent newData={newData} />
-    </Container>
-    </Layout>
+      <LearningPathContent newData={newData} />
+    </>
   );
 };
 

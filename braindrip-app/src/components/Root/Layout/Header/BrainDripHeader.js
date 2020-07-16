@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import {
   Layout,
   Avatar,
@@ -21,7 +21,7 @@ import { useLazyQuery } from "@apollo/client";
 
 
 import { GET_LEARNING_PATHS_BY_USER } from "#root/graphql/queries"
-
+import { useAuthToken } from "#root/auth/authToken";
 import { logoutUser } from "#root/actions/userActions";
 
 import { Button } from "antd";
@@ -33,18 +33,34 @@ function BrainDripHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { user } = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // const [learningPaths, setLearningPaths] = useState([]);
-  const [fetchPaths, { loading, data, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, {variables: {userId: user ? user.id : ""}})
-
+  const [_fetchPaths, { loading, learningPaths, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, { variables: { userId } })
+  const [ , , removeAuthToken] = useAuthToken();
   let headerRight;
+
+
+  const fetchPaths = (e) => {
+    e.preventDefault();
+    console.log(user)
+    userId = user.id
+    _fetchPaths()
+  }
+
+  const logout = (e) => {
+    e.preventDefault();
+    removeAuthToken();
+    dispatch(logoutUser());
+    history.push("/login");
+  }
 
   useEffect(() => {
     console.log(isLoggedIn)
     console.log(user)
     setIsLoggedIn(user ? true : false)
   }, [user])
-
+  console.log(learningPaths);
   if (!isLoggedIn) {
     headerRight = (
       <>
@@ -72,8 +88,8 @@ function BrainDripHeader() {
     );
     const menu = (
       <Menu style={{ width: 256 }}>
-        <Menu.Item key="edit">
-          <Link to='/edit'>Edit Profile</Link>
+        <Menu.Item key="home">
+          <Link to='/home'>Home</Link>
         </Menu.Item>
         <Menu.Item key="account">
           <Link to='/account'>Account</Link>
@@ -85,15 +101,15 @@ function BrainDripHeader() {
           <Link to='/help'>Help</Link>
         </Menu.Item>
         <Menu.Item key="signout">
-          <Link onClick={() => dispatch(logoutUser())}>Sign Out</Link>
+          <Link to='/logout' onClick={logout}>Sign Out</Link>
         </Menu.Item>
       </Menu>
     );
     headerRight = (
       <>
-        <Dropdown 
-        overlay={paths}
-        trigger={['click']}
+        <Dropdown
+          overlay={paths}
+          trigger={['click']}
         >
           <a
             className="ant-dropdown-link"

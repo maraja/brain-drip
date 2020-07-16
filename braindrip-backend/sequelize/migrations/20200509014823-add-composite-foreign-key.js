@@ -2,7 +2,6 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    console.debug('here');
     return Promise.all([
       queryInterface.addConstraint('upvotes', ['userId', 'learningPathId'], {
         type: 'unique',
