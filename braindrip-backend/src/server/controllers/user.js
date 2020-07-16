@@ -3,6 +3,7 @@ import HE from "#root/helpers/errorHandling";
 import generateUUID from "#root/helpers/generateUUID";
 import hashPassword from "#root/helpers/hashPassword";
 import passwordCompareSync from "#root/helpers/passwordCompareSync";
+import jwt from "#root/server/auth/jwt";
 
 const { User, Favorites, LearningPath, LearningPathResource } = db;
 
@@ -13,13 +14,13 @@ const getAllUsers = async (req, res, next) => {
     // if (!req.body.email || !req.body.password) {
     //     return next(new Error("Invalid body!"));
     // }
-    try {   
+    try {
         const users = await User.findAll();
         return res.json({
-            message:"Users succesfully retrieved!",
+            message: "Users succesfully retrieved!",
             users
         });
-    } catch(e) {
+    } catch (e) {
         return next(e);
     }
 }
@@ -36,25 +37,25 @@ const createUser = async (req, res, next) => {
             passwordHash: hashPassword(password)
         })
         return res.json({
-            message:"New User succesfully created!",
+            message: "New User succesfully created!",
             success: true,
             newUser
         });
-    } catch(e) {
+    } catch (e) {
         return next(e);
     }
 }
 
 const loginUser = async (req, res, next) => {
     if (!req.body.email || !req.body.password) {
-        return  next(HE(400, "Invalid body!"));
-      }
-      
+        return next(HE(400, "Invalid body!"));
+    }
+
     const { email, password } = req.body;
-  
-      try {
-        let user = await User.findOne({ 
-            attributes: {}, 
+
+    try {
+        let user = await User.findOne({
+            attributes: {},
             where: { email },
             subQuery: false,
             include: [
@@ -83,37 +84,37 @@ const loginUser = async (req, res, next) => {
                         }
                     ]
                 }
-            ], 
+            ],
             // the following two will flatten and spit out only a json
-            nest: true, 
+            nest: true,
         });
-  
+
         if (!user) return next(HE(400, "Invalid email!"));
 
         user = user.toJSON()
-  
+
         if (!passwordCompareSync(password, user.passwordHash)) {
-          return next(HE(400, "Incorrect password!" ));
+            return next(HE(400, "Incorrect password!"));
         }
-  
+
         // const expiresAt = addHours(new Date(), USER_SESSION_EXPIRY_HOURS);
-  
+
         // const sessionToken = generateUUID();
-  
+
         // const userSession = await UserSession.create({
         //   expiresAt,
         //   id: sessionToken,
         //   userId: user.id
         // });
-  
         return res.json({
-            message:"User successfully logged in.",
+            message: "User successfully logged in.",
             success: true,
-            user: { ...user, passwordHash: undefined }
+            user: { ...user, passwordHash: undefined },
+            token: await jwt.createToken({ id: user.id })
         });
-      } catch (e) {
+    } catch (e) {
         return next(e);
-      }
+    }
 }
 
 const getUserById = async (req, res, next) => {
@@ -146,13 +147,13 @@ const getUserById = async (req, res, next) => {
                         }
                     ]
                 }
-            ], 
+            ],
             // the following two will flatten and spit out only a json
             nest: true,
         });
 
         if (!user) return next(new Error("User not found."))
-        
+
         return res.json({
             message: "User successfully retrieved!",
             user
@@ -165,6 +166,6 @@ const getUserById = async (req, res, next) => {
 export default {
     getAllUsers,
     createUser,
-    loginUser, 
+    loginUser,
     getUserById
 }

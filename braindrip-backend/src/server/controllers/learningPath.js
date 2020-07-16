@@ -8,14 +8,12 @@ const createLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
     try {
-        const user = await User.findAll(); // Replace with authenticated user
-        const { name, description, tags, difficulty, userId } = req.body;
-        const user_id = userId || user[0].id
+        const { name, description, tags, difficulty } = req.body;
         const newLearningPath = await LearningPath.create({
             id: generateUUID(),
             upVotes: 0,
             downVotes: 0,
-            name, description, tags, difficulty, userId: user_id
+            name, description, tags, difficulty, userId: req.user.id
         })
         return res.json({
             success: true,
@@ -109,7 +107,7 @@ const getLearningPathsByUserId = async (req, res, next) => {
         // const user = await User.findAll(); // Replace with authenticated user
         const learningPaths = await LearningPath.findAll({
             where: {
-                userId: req.params.userId
+                userId: req.user.id
             },
             order: [['updatedAt', 'DESC']]
         });

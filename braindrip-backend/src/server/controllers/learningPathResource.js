@@ -48,7 +48,6 @@ const updateLearningPathResource = async (req, res, next) => {
 }
 const getLearningPathResourceById = async (req, res, next) => {
     try {
-        console.debug(req.params);
         const learningPathResource = await LearningPathResource.findByPk(req.params.learningPathResourceId, {
             subQuery: false,
             include: [

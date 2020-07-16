@@ -97,7 +97,8 @@ const typeDefs = gql`
     type UserLoginResponse {
         success: Boolean!
         message: String!
-        user: User
+        user: User,
+        token: String!
     }
 
     type LearningPathCreateResponse {

@@ -39,12 +39,16 @@ export default class BrainDripService {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path`).json();
         return body.learningPaths;
     }
-    
-    static async fetchLearningPathsByUser({ userId }) {
-        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/${userId}`).json();
+
+    static async fetchLearningPathsByUser({ userId, auth }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/${userId}`, {
+            headers: {
+                'Authorization': auth
+            }
+        }).json();
         return body.learningPaths;
     }
-    
+
     static async fetchLearningPath({ id }) {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/id/${id}`).json();
         return body.learningPath;
@@ -55,9 +59,12 @@ export default class BrainDripService {
         return body;
     }
 
-    static async createLearningPath({ name, userId, description, tags, difficulty }) {
+    static async createLearningPath({ name, userId, description, tags, difficulty, auth }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-path`, {
-            json: { name, userId, description, tags, difficulty }
+            json: { name, userId, description, tags, difficulty },
+            headers: {
+                'Authorization': auth
+            }
         }).json();
         return body;
     }
@@ -119,7 +126,7 @@ export default class BrainDripService {
 
     static async updateLearningBucket({ id, name, description, tags, userId }) {
         const body = await got.put(`${BRAINDRIP_BACKEND_URI}/learning-bucket`, {
-            json: { id, name, description, tags, userId}
+            json: { id, name, description, tags, userId }
         }).json();
         return body;
     }

@@ -38,7 +38,6 @@ export default function (passport) {
                     'googleId'
                 ]
             });
-
             if (user) {
                 return done(null, user);
             } else {
