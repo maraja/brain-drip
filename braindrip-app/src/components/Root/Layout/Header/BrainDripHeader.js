@@ -36,7 +36,7 @@ function BrainDripHeader() {
   const history = useHistory();
 
   // const [learningPaths, setLearningPaths] = useState([]);
-  const [_fetchPaths, { loading, learningPaths, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, { variables: { userId } })
+  const [_fetchPaths, { loading, data, error }] = useLazyQuery(GET_LEARNING_PATHS_BY_USER, { variables: { userId } })
   const [ , , removeAuthToken] = useAuthToken();
   let headerRight;
 
@@ -60,7 +60,7 @@ function BrainDripHeader() {
     console.log(user)
     setIsLoggedIn(user ? true : false)
   }, [user])
-  console.log(learningPaths);
+  // console.log(learningPaths);
   if (!isLoggedIn) {
     headerRight = (
       <>
