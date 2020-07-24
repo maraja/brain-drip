@@ -7,13 +7,18 @@ const { Header, Footer, Sider, Content } = _Layout;
 import BrainDripHeader from './Header';
 import BrainDripFooter from './Footer';
 
+import styled from 'styled-components'
+
+const BDLayout = styled(_Layout)`
+`
+
 function Layout({ children }) {
     return (
-        <_Layout>
+        <BDLayout>
             <BrainDripHeader>Header</BrainDripHeader>
             <Content>{children}</Content>
             <BrainDripFooter>Footer</BrainDripFooter>
-        </_Layout>
+        </BDLayout>
     )
 }
 

@@ -1,0 +1,124 @@
+// find styles from here: https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+
+@bg-color: #3aafa9;
+@primary-color: #feffff;
+@primary-color-dark: #def2f1;
+@secondary-color: #2b7a78;
+@secondary-color-dark: #17252a;
+
+@primary-color: #feffff; // primary color for all components
+@link-color: #2b7a78; // link color
+@success-color: #52c41a; // success state color
+@warning-color: #faad14; // warning state color
+@error-color: #f5222d; // error state color
+@font-size-base: 14px; // major text font size
+@heading-color: rgba(0, 0, 0, 0.85); // heading text color
+@text-color: rgba(0, 0, 0, 0.65); // major text color
+@text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
+@disabled-color: rgba(0, 0, 0, 0.25); // disable state color
+@border-radius-base: 2px; // major border radius
+@border-color-base: #d9d9d9; // major border color
+@box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
+
+  // Background color for `<body>`
+@body-background: @bg-color;
+// Base background color for most components
+@component-background: @bg-color;
+// Popover background color
+@popover-background: @component-background;
+@popover-customize-border-color: @border-color-split;
+@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+@code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+// @text-color: fade(@black, 65%);
+@text-color: @primary-color;
+// @text-color-secondary: fade(@black, 45%);
+@text-color-secondary: @primary-color-dark;
+@text-color-inverse: @secondary-color-dark;
+@icon-color: inherit;
+@icon-color-hover: fade(@black, 75%);
+// @heading-color: fade(#000, 85%);
+@heading-color: @primary-color-dark;
+// @heading-color-dark: fade(@white, 100%);
+@heading-color-dark: @secondary-color-dark;
+// @text-color-dark: fade(@white, 85%);
+@text-color-dark: @secondary-color;
+// @text-color-secondary-dark: fade(@white, 65%);
+@text-color-secondary-dark: @secondary-color-dark;
+@text-selection-bg: @primary-color;
+@font-variant-base: tabular-nums;
+@font-feature-settings-base: 'tnum';
+@font-size-base: 14px;
+@font-size-lg: @font-size-base + 2px;
+@font-size-sm: 12px;
+
+// Border color
+@border-color-base: hsv(0, 0, 85%); // base border outline a component
+@border-color-split: hsv(0, 0, 94%); // split border inside a component
+@border-color-inverse: @white;
+@border-width-base: 1px; // width of the border for a component
+@border-style-base: solid; // style of a components border
+
+// Outline
+@outline-blur-size: 0;
+@outline-width: 2px;
+@outline-color: @primary-color;
+@outline-fade: 20%;
+
+// @background-color-light: hsv(0, 0, 98%); // background of header and selected item
+@background-color-light: @primary-color; // background of header and selected item
+// @background-color-base: hsv(0, 0, 96%); // Default grey background color
+@background-color-base: @primary-color-dark; // Default grey background color
+
+
+// Layout
+@layout-body-background: @bg-color;
+@layout-header-background: @bg-color;
+@layout-header-height: 64px;
+@layout-header-padding: 0 50px;
+@layout-header-color: @text-color;
+@layout-footer-padding: 24px 50px;
+@layout-footer-background: @layout-body-background;
+@layout-sider-background: @layout-header-background;
+@layout-trigger-height: 48px;
+@layout-trigger-background: #002140;
+@layout-trigger-color: #fff;
+@layout-zero-trigger-width: 36px;
+@layout-zero-trigger-height: 42px;
+// Layout light theme
+@layout-sider-background-light: #fff;
+@layout-trigger-background-light: #fff;
+@layout-trigger-color-light: @text-color;
+
+
+// Card
+// ---
+@card-head-color: @heading-color;
+@card-head-background: transparent;
+@card-head-font-size: @font-size-lg;
+@card-head-font-size-sm: @font-size-base;
+@card-head-padding: 16px;
+@card-head-padding-sm: @card-head-padding / 2;
+@card-head-height: 48px;
+@card-head-height-sm: 36px;
+@card-inner-head-padding: 12px;
+@card-padding-base: 24px;
+@card-padding-base-sm: @card-padding-base / 2;
+@card-actions-background: @background-color-light;
+@card-actions-li-margin: 12px 0;
+@card-skeleton-bg: #cfd8dc;
+@card-background: @component-background;
+@card-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
+  0 5px 12px 4px rgba(0, 0, 0, 0.09);
+@card-radius: @border-radius-base;
+@card-head-tabs-margin-bottom: -17px;
+@card-head-extra-color: @text-color;
+
+// veryLightGrey: "#CCCCCC",
+// bgColor: '#3aafa9',
+// primaryColor: '#feffff',
+// primaryColorDark: '#def2f1',
+// secondaryColor: '#2b7a78',
+// secondaryColorDark: '#17252a',

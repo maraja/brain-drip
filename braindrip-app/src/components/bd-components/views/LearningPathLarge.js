@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-dom'
 
-import { Card, Row, Col, Typography, Divider } from "antd";
+import { Card, Row, Col, Typography, Divider, Space } from "antd";
 
 const { Title, Text, Paragraph } = Typography;
+
+import LearningPathResourceCard from './LearningPathResourceCard'
 
 function LearningPathLarge({ learningPath }) {
     return (
@@ -21,22 +24,7 @@ function LearningPathLarge({ learningPath }) {
         </Col>
         <Divider />
         <Row>
-          {learningPath.learningPathResources &&
-            learningPath.learningPathResources.map((r) => (
-              <Col key={r.id} span={rowSpan}>
-                <Card
-                  title={`${r.type}: ${r.topic}`}
-                  extra={
-                    <a href={r.url} target="blank_">
-                      Resource
-                    </a>
-                  }
-                >
-                  {r.sequenceNumber} <br />
-                  {r.description}
-                </Card>
-              </Col>
-            ))}
+          <LearningPathResourceCard learningPath={learningPath} />
         </Row>
         </>
     )

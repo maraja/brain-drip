@@ -20,9 +20,10 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
  
 import rootReducer from './reducers'
 
-import * as theme from "./theme";
 import "./index.css";
+import './index.less'
 import "#root/assets/_styles.scss"
+import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle `
     @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');

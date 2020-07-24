@@ -24,10 +24,15 @@ import { GET_LEARNING_PATHS_BY_USER } from "#root/graphql/queries"
 import { useAuthToken } from "#root/auth/authToken";
 import { logoutUser } from "#root/actions/userActions";
 
+import styled from 'styled-components';
+
 import { Button } from "antd";
 
 let userId = ""
 const MAX_LP_TO_SHOW = 10
+
+const BDHeader = styled(Header)`
+`
 
 function BrainDripHeader() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -122,7 +127,7 @@ function BrainDripHeader() {
   return (
     <div className="header">
       {/* Replace backgroundColor with proper theme */}
-      <Header style={{ height: '70px', padding: "0px 5%", backgroundColor: "white" }}>
+      <BDHeader style={{ height: '70px', padding: "0px 5%"}}>
         <Row>
           <Col span={18} order={1}>
             <Logo />
@@ -138,7 +143,7 @@ function BrainDripHeader() {
             <Space style={{ float: "right" }}>{headerRight}</Space>
           </Col>
         </Row>
-      </Header>
+      </BDHeader>
     </div>
   )
 }

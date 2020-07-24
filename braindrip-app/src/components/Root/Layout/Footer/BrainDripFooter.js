@@ -5,10 +5,15 @@ const { Text } = Typography;
 import Social from "./Social";
 import ImportantLinks from "./ImportantLinks";
 
+import styled from 'styled-components'
+
+const BDFooter = styled(Footer)`
+`
+
 const BrainDripFooter = () => {
   return (
     <div className="footer">
-      <Footer style={{ backgroundColor: "white" }}>
+      <BDFooter>
         <Divider />
         <ImportantLinks />
         <Divider />
@@ -23,7 +28,7 @@ const BrainDripFooter = () => {
             </Space>
           </Col>
         </Row>
-      </Footer>
+      </BDFooter>
     </div>
   );
 };
