@@ -10,3 +10,4 @@ export { default as learningPathResource } from './getLearningPathResource';
 export { default as learningBucketResource } from './getLearningBucketResource';
 export { default as learningPaths } from './getLearningPaths';
 export { default as userLearningPaths } from './getLearningPathsByUser';
+export { default as userLearningBuckets } from './getLearningBucketsByUser';

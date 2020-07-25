@@ -88,3 +88,42 @@ export const GET_LEARNING_PATH_DETAIL = gql`
     }
   }
 `;
+
+
+// LEARNING BUCKET
+
+export const GET_LEARNING_BUCKETS_BY_USER = gql`
+  query userLearningBuckets {
+    userLearningBuckets {
+      id
+      name
+      description
+      userId
+      learningBucketResources {
+        id
+        learningBucketId
+        url
+        topic
+        description
+      }
+    }
+  }
+`;
+
+export const GET_LEARNING_BUCKET_DETAIL = gql`
+  query getLearningBucket($id: String!) {
+    learningBucket(id: $id) {
+      id
+      name
+      description
+      userId
+      learningBucketResources {
+        id
+        learningBucketId
+        url
+        topic
+        description
+      }
+    }
+  }
+`;

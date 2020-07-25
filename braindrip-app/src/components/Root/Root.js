@@ -10,6 +10,9 @@ import LearningPaths from "./LearningPath/LearningPathList";
 import LearningPathDetails from "./LearningPath/LearningPathDetails";
 import LearningPathEdit from "./LearningPath/LearningPathEdit";
 import LearningPathCreate from "./LearningPath/LearningPathCreate";
+import LearningBucketCreate from "./LearningBucket/LearningBucketCreate";
+import LearningBucketEdit from "./LearningBucket/LearningBucketEdit";
+import LearningBucketDetails from "./LearningBucket/LearningBucketDetails";
 import LearningPathsSearchResult from "./LearningPath/LearningPathsSearchResult";
 import UserHome from "./UserHome";
 import UserLearningPaths from "./UserHome/LearningPaths";
@@ -38,6 +41,11 @@ function Root() {
       <Route path="/learning-path/id/:id" component={LearningPathDetails} />{" "}
       <Route path="/learning-path/edit/:id" component={LearningPathEdit} />{" "}
       <Route path="/learning-path/create" component={LearningPathCreate} />{" "}
+
+      <Route path="/learning-bucket/create" component={LearningBucketCreate} />{" "}
+      <Route path="/learning-bucket/edit/:id" component={LearningBucketEdit} />{" "}
+      <Route path="/learning-bucket/id/:id" component={LearningBucketDetails} />{" "}
+
       <Route component={NotFound} />
     </Switch>
   );

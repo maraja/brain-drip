@@ -41,6 +41,8 @@ paths:
     $ref: './auth/facebookcallback.yml#/facebookCallback'
   /learning-bucket:
     $ref: './learningbucket/learningbucket.yml#/learningBucket'
+  /learning-bucket/user/:
+    $ref: './learningbucket/learningbucketbyuserid.yml#/learningBucketByUserId'
   /learning-bucket/id/{id}:
     $ref: './learningbucket/learningbucketbyid.yml#/learningBucketById'
   /learning-bucket/resource:

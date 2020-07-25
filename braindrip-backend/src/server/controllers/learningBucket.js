@@ -6,18 +6,18 @@ const { User, LearningBucket, LearningBucketResource } = db;
 const createLearningBucket = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
 
-    const { name, description, tags, userId } = req.body;
+    const { name, description, tags } = req.body;
     try {
         const newLearningBucket = await LearningBucket.create({
             id: generateUUID(),
-            name, description, tags, userId
+            name, description, tags, userId: req.user.id
         })
         return res.json({
             success: true,
             message: "Learning Bucket Successfully created.",
             newLearningBucket
         });
-    } catch(e) {
+    } catch (e) {
         return next(e);
     }
 }
@@ -34,13 +34,13 @@ const getLearningBucketById = async (req, res, next) => {
                     model: LearningBucketResource,
                     as: 'learningBucketResources'
                 }
-            ],  
+            ],
             // the following two will flatten and spit out only a json
             nest: true,
         });
 
         if (!learningBucket) return next(new Error("Invalid learning path ID"))
-        
+
         return res.json({
             message: "Successfully retrieved learning path.",
             learningBucket
@@ -58,7 +58,7 @@ const updateLearningBucket = async (req, res, next) => {
     try {
         const learningBucket = await LearningBucket.update({
             name, description, tags
-        }, { 
+        }, {
             where: { id: id, userId: userId },
             returning: true,
             plain: true
@@ -67,7 +67,7 @@ const updateLearningBucket = async (req, res, next) => {
             success: true,
             message: `Learning Bucket Successfully updated.`
         });
-    } catch(e) {
+    } catch (e) {
         return next(e);
     }
 }
@@ -78,20 +78,46 @@ const deleteLearningBucket = async (req, res, next) => {
     const { id, userId } = req.body;
 
     try {
-        const learningBucket = await LearningBucket.destroy( { 
+        const learningBucket = await LearningBucket.destroy({
             where: { id: id, userId: userId },
         })
         return res.json({
             success: true,
             message: `Learning Bucket Successfully deleted.`
         });
-    } catch(e) {
+    } catch (e) {
+        return next(e);
+    }
+}
+
+const getLearningBucketsByUserId = async (req, res, next) => {
+    try {
+        const learningBuckets = await LearningBucket.findAll({
+            include: [{
+                model: LearningBucketResource,
+                as: 'learningBucketResources'
+            }
+            ],
+            where: {
+                userId: req.user.id
+            },
+            order: [['updatedAt', 'DESC']]
+        });
+
+        if (!learningBuckets) return next(new Error("Invalid learning bucket ID"))
+
+        return res.json({
+            message: "Successfully retrieved learning buckets.",
+            learningBuckets
+        });
+    } catch (e) {
         return next(e);
     }
 }
 
 export default {
-    getLearningBucketById, 
+    getLearningBucketById,
+    getLearningBucketsByUserId,
     createLearningBucket,
     updateLearningBucket,
     deleteLearningBucket

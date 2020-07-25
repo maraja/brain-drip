@@ -69,3 +69,47 @@ export const CREATE_LEARNING_PATH_RESOURCE = gql`
         }
     }
 `;
+
+
+// LEARNING BUCKETS
+export const CREATE_LEARNING_BUCKET = gql`
+    mutation createLearningBucket($name: String!, $description: String!, $tags: String!) {
+        createLearningBucket(name: $name, description: $description, tags: $tags) {
+            success
+            message
+            newLearningBucket {
+                id
+                name
+                description
+                userId
+            }
+        }
+    }
+`;
+
+
+// LEARNING BUCKET RESOURCES
+export const CREATE_LEARNING_BUCKET_RESOURCE = gql`
+    mutation createLearningBucketResource(
+        $learningBucketId: String!, 
+        $url: String!,  
+        $topic: String!,
+        $description: String!) {
+
+        createLearningBucketResource(
+            learningBucketId: $learningBucketId, 
+            url: $url, 
+            topic: $topic,
+            description: $description) {
+                success
+                message
+                learningBucketResource {
+                    id
+                    learningBucketId
+                    url
+                    topic
+                    description
+                }
+        }
+    }
+`;

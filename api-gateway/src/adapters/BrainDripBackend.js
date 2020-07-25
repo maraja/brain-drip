@@ -112,14 +112,27 @@ export default class BrainDripService {
     }
 
     // LEARNING BUCKETS
+
+    static async fetchLearningBucketsByUser({ auth }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-bucket/user/`, {
+            headers: {
+                'Authorization': auth
+            }
+        }).json();
+        return body.learningBuckets;
+    }
+
     static async fetchLearningBucket({ id }) {
         const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-bucket/id/${id}`).json();
         return body.learningBucket;
     }
 
-    static async createLearningBucket({ name, description, tags, userId }) {
+    static async createLearningBucket({ name, description, tags, auth }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-bucket`, {
-            json: { name, description, tags, userId }
+            json: { name, description, tags },
+            headers: {
+                'Authorization': auth
+            }
         }).json();
         return body;
     }
@@ -145,9 +158,12 @@ export default class BrainDripService {
         return body.learningBucketResource;
     }
 
-    static async createLearningBucketResource({ learningBucketId, url, topic, description }) {
+    static async createLearningBucketResource({ learningBucketId, url, topic, description, auth }) {
         const body = await got.post(`${BRAINDRIP_BACKEND_URI}/learning-bucket/resource`, {
-            json: { learningBucketId, url, topic, description }
+            json: { learningBucketId, url, topic, description },
+            headers: {
+                'Authorization': auth
+            }
         }).json();
         return body;
     }

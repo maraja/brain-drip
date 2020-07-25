@@ -52,6 +52,7 @@ const typeDefs = gql`
         name: String!
         description: String!
         # tags: [String]!
+        userId: ID!
         learningBucketResources: [LearningBucketResource]
     }
 
@@ -155,7 +156,7 @@ const typeDefs = gql`
                                     url: String!, description: String!, topic: String!, type: String!, sequenceNumber: Int): LearningPathResourceResponse
         deleteLearningPathResource(id: String!): Response
 
-        createLearningBucket(name: String!, description: String!, tags: String!, userId: String!): LearningBucketCreateResponse
+        createLearningBucket(name: String!, description: String!, tags: String!): LearningBucketCreateResponse
         updateLearningBucket(id: String!, name: String, description: String, tags: String, userId: String!): Response
         deleteLearningBucket(id: String!, userId: String!): Response
 
@@ -184,6 +185,7 @@ const typeDefs = gql`
         learningPath(id: String!): LearningPath
         learningPaths: [LearningPath]
         userLearningPaths(userId: String!): [LearningPath]
+        userLearningBuckets: [LearningBucket]
         learningPathSearch(searchString: String!): [LearningPath]
         learningPathResource(id: String!): LearningPathResource
         learningBucket(id: String!): LearningBucket

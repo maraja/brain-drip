@@ -1,4 +1,5 @@
 import express from 'express';
+import passport from 'passport';
 let router = express.Router();
 
 import learningBucketResourceController from "#root/server/controllers/learningBucketResource";
@@ -8,9 +9,9 @@ const {
     updateLearningBucketResource,
     getLearningBucketResourceById,
     deleteLearningBucketResource
- } = learningBucketResourceController
+} = learningBucketResourceController
 
-router.post("/", createLearningBucketResource)
+router.post("/", passport.authenticate('jwt', { session: false }), createLearningBucketResource)
 
 router.put("/", updateLearningBucketResource)
 

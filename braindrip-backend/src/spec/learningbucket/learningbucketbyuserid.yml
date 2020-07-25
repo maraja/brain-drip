@@ -1,0 +1,48 @@
+learningBucketByUserId:
+    get:
+        description: |
+            Get learning Bucket by id
+        operationId: getLearningBucketByUserId
+        responses:
+            '200':
+                description: learning bucket response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/LearningBucket'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningBucket:
+            required:
+                - id
+                - name
+                - description
+                - tags
+                - userId
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                    description: name of this learning bucket.
+                description:
+                    type: string
+                    description: description of this learning bucket.
+                tags:
+                    type: string
+                    description: tags for this learning bucket.
+                userId:
+                    type: string
+                    description: id of user
+                learningBucketResources:
+                    type: array
+                    description: array of learning buckets.

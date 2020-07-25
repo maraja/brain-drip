@@ -104,8 +104,13 @@ const getLearningPathById = async (req, res, next) => {
 
 const getLearningPathsByUserId = async (req, res, next) => {
     try {
-        // const user = await User.findAll(); // Replace with authenticated user
+
         const learningPaths = await LearningPath.findAll({
+            include: [{
+                model: LearningPathResource,
+                as: 'learningPathResources'
+            }
+            ],
             where: {
                 userId: req.user.id
             },
