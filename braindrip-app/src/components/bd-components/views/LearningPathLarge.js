@@ -21,6 +21,16 @@ function LearningPathLarge({ learningPath }) {
           <Paragraph>
               <Text>Difficulty: {learningPath.difficulty}</Text>
           </Paragraph>
+          <Paragraph>
+              <Text>Tags: &nbsp;
+              {learningPath.tags &&
+                learningPath.tags.map((r) => (
+                      <>
+                    {r.name}, &nbsp;
+                    </>
+                ))}
+              </Text>
+          </Paragraph>
         </Col>
         <Divider />
         <Row>

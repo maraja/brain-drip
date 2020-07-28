@@ -8,8 +8,6 @@ import LearningBucketLarge from "#root/components/bd-components/views/LearningBu
 
 import { GET_LEARNING_BUCKET_DETAIL } from "#root/graphql/queries"
 
-// console.log(GET_LEARNING_PATH_DETAIL)
-
 const { Title, Text, Paragraph } = Typography;
 
 import Layout from "#root/components/Root/Layout";

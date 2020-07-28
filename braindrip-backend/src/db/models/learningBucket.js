@@ -14,10 +14,6 @@ module.exports =  function(sequelize, DataTypes) {
         allowNull: false,
         type: DataTypes.TEXT
     },
-    tags: {
-        allowNull: true,
-        type: DataTypes.STRING
-    },
     userId: {
       allowNull: false,
       type: DataTypes.UUID
@@ -31,6 +27,11 @@ module.exports =  function(sequelize, DataTypes) {
     this.belongsTo(models.User, {
         foreignKey: 'id',
         as: 'user'
+    });
+    this.belongsToMany(models.Tag, {
+      through: 'LearningBucketTag',
+      foreignKey: "learningBucketId",
+      as: 'tags'
     });
   };
 

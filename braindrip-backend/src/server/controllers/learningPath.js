@@ -2,7 +2,7 @@ import db from "#root/db";
 import generateUUID from "#root/helpers/generateUUID";
 import Sequelize, { Op } from 'sequelize';
 
-const { User, Favorites, LearningPath, LearningPathResource } = db;
+const { User, Favorites, LearningPath, LearningPathResource, Tag, LearningPathTag } = db;
 
 const createLearningPath = async (req, res, next) => {
     if (!req.body) return next(new Error("Invalid body!"));
@@ -13,8 +13,50 @@ const createLearningPath = async (req, res, next) => {
             id: generateUUID(),
             upVotes: 0,
             downVotes: 0,
-            name, description, tags, difficulty, userId: req.user.id
-        })
+            name, description, difficulty, userId: req.user.id
+        });
+
+        const tagsResult = await Tag.findAll({
+            where: {
+                name: tags,
+            }
+        });
+
+        let learningPathTagsArray = [];
+        let tagsArrayInsert = [];
+
+        tags.forEach(element => {
+            let tagFound = tagsResult.find(item => item.name === element);
+            if (tagFound) {
+                learningPathTagsArray.push({
+                    id: generateUUID(),
+                    tagId: tagFound.id,
+                    learningPathId: newLearningPath.id,
+                });
+            } else {
+                tagsArrayInsert.push({
+                    id: generateUUID(),
+                    name: element.trim().toLowerCase(),
+                });
+            }
+        });
+
+        if (tagsArrayInsert.length > 0) {
+            const tagInsertResult = await Tag.bulkCreate(tagsArrayInsert);
+
+            tagInsertResult.forEach(element => {
+                learningPathTagsArray.push({
+                    id: generateUUID(),
+                    tagId: element.id,
+                    learningPathId: newLearningPath.id,
+                });
+            });
+        }
+
+        if (learningPathTagsArray.length > 0) {
+            await LearningPathTag.bulkCreate(learningPathTagsArray);
+        }
+
         return res.json({
             success: true,
             message: "Learning Path Successfully created.",
@@ -82,10 +124,15 @@ const getLearningPathById = async (req, res, next) => {
                 {
                     model: LearningPathResource,
                     as: 'learningPathResources'
+                },
+                {
+                    model: Tag,
+                    as: 'tags'
                 }
             ],
             order: [
                 [db.Sequelize.col('sequenceNumber'), 'ASC'],
+                ['tags', 'name', 'ASC']
             ],
             // the following two will flatten and spit out only a json
             nest: true,
@@ -109,14 +156,20 @@ const getLearningPathsByUserId = async (req, res, next) => {
             include: [{
                 model: LearningPathResource,
                 as: 'learningPathResources'
+            },
+            {
+                model: Tag,
+                as: 'tags'
             }
             ],
             where: {
                 userId: req.user.id
             },
-            order: [['updatedAt', 'DESC']]
+            order: [
+                ['updatedAt', 'DESC'],
+                ['tags', 'name', 'ASC']
+            ],
         });
-
         if (!learningPaths) return next(new Error("Invalid learning path ID"))
 
         return res.json({
@@ -168,6 +221,10 @@ const searchLearningPathsByParams = async (req, res, next) => {
                 }, {
                     model: LearningPathResource,
                     as: 'learningPathResources'
+                },
+                {
+                    model: Tag,
+                    as: 'tags'
                 }
             ],
             // the following two will flatten and spit out only a json
@@ -197,6 +254,10 @@ const searchLearningPathsByString = async (req, res, next) => {
                 }, {
                     model: LearningPathResource,
                     as: 'learningPathResources'
+                },
+                {
+                    model: Tag,
+                    as: 'tags'
                 }
             ],
             // the following two will flatten and spit out only a json

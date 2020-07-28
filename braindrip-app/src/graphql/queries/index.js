@@ -43,6 +43,9 @@ export const GET_LEARNING_PATHS_BY_USER = gql`
       upVotes
       downVotes
       userId
+      tags {
+        name
+      }
       learningPathResources {
         id
         learningPathId
@@ -76,6 +79,9 @@ export const GET_LEARNING_PATH_DETAIL = gql`
       upVotes
       downVotes
       userId
+      tags {
+        name
+      }
       learningPathResources {
         id
         learningPathId
@@ -99,6 +105,9 @@ export const GET_LEARNING_BUCKETS_BY_USER = gql`
       name
       description
       userId
+      tags {
+        name
+      }
       learningBucketResources {
         id
         learningBucketId
@@ -117,6 +126,9 @@ export const GET_LEARNING_BUCKET_DETAIL = gql`
       name
       description
       userId
+      tags {
+        name
+      }
       learningBucketResources {
         id
         learningBucketId

@@ -19,7 +19,14 @@ function LearningBucketLarge({ learningBucket }) {
               <Text>{learningBucket.description}</Text>
           </Paragraph>
           <Paragraph>
-              <Text>Tags: {learningBucket.description}</Text>
+              <Text>Tags: &nbsp;
+              {learningBucket.tags &&
+                learningBucket.tags.map((r) => (
+                      <>
+                    {r.name}, &nbsp;
+                    </>
+                ))}
+              </Text>
           </Paragraph>
         </Col>
         <Divider />

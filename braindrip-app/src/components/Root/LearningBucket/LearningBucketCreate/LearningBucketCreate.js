@@ -52,7 +52,7 @@ const LearningBucketCreate = ({ }) => {
           userId: user.id, 
           name: values.path_name,
           description: values.path_description,
-          tags: values.path_tags,
+          tags: values.path_tags ? values.path_tags.split(',') : [],
         }
       });
 

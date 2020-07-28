@@ -34,7 +34,7 @@ const LearningPathList = () => {
   if (data && user.id) {
     data.learningPaths = data.userLearningPaths;
   }
-
+  console.log(data);
   // if (newData) {
   //   refetch();
   // }

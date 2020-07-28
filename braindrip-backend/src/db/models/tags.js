@@ -1,8 +1,8 @@
 'use strict';
 
 
-module.exports = function(sequelize, DataTypes) {
-    var Tags = sequelize.define('Tags', {
+module.exports = function (sequelize, DataTypes) {
+    var Tags = sequelize.define('Tag', {
         id: {
             allowNull: false,
             primaryKey: true,
@@ -12,16 +12,16 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             type: DataTypes.STRING
         },
-        learningPathId: {
-            allowNull: true,
-            type: DataTypes.UUID
-        }
-    }, {tableName: "tags"});
+    }, { tableName: "tags" });
 
     Tags.associate = function (models) {
-        this.belongsTo(models.LearningPath, {
-            foreignKey: 'learningPathId',
-            as: 'learningPath'
+        this.belongsToMany(models.LearningPath, {
+            through: 'LearningPathTag',
+            foreignKey: 'tagId',
+        }),
+        this.belongsToMany(models.LearningBucket, {
+            through: 'LearningBucketTag',
+            foreignKey: "tagId",
         });
     };
 

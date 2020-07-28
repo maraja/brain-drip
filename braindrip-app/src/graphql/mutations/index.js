@@ -20,7 +20,7 @@ export const SIGNUP_USER = gql`
 
 // LEARNING PATHS
 export const CREATE_LEARNING_PATH = gql`
-    mutation createLearningPath($name: String!, $description: String!, $difficulty: String!, $userId: String!, $tags: String! ) {
+    mutation createLearningPath($name: String!, $description: String!, $difficulty: String!, $userId: String!, $tags: [String]! ) {
         createLearningPath(name: $name, description: $description, difficulty: $difficulty, userId: $userId, tags: $tags ) {
             success
             message
@@ -73,7 +73,7 @@ export const CREATE_LEARNING_PATH_RESOURCE = gql`
 
 // LEARNING BUCKETS
 export const CREATE_LEARNING_BUCKET = gql`
-    mutation createLearningBucket($name: String!, $description: String!, $tags: String!) {
+    mutation createLearningBucket($name: String!, $description: String!, $tags: [String]!) {
         createLearningBucket(name: $name, description: $description, tags: $tags) {
             success
             message
