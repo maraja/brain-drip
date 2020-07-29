@@ -206,7 +206,7 @@ const searchLearningPathsByParams = async (req, res, next) => {
         whereStatement.id = query.id;
     }
     if (query.search) {
-        whereStatement.name = Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('name')), 'LIKE', `%${query.search}%`);
+        whereStatement.name = Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('LearningPath.name')), 'LIKE', `%${query.search}%`);
         // whereStatement.description = Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('description')), 'LIKE', `%${query.search}%`);
     }
 
@@ -245,7 +245,7 @@ const searchLearningPathsByString = async (req, res, next) => {
         const learningPaths = await LearningPath.findAll({
             subQuery: false,
             where: {
-                name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('name')), 'LIKE', `%${searchString}%`),
+                name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('LearningPath.name')), 'LIKE', `%${searchString}%`),
             },
             include: [
                 {
