@@ -17,5 +17,13 @@ braindrip-backend/node_modules
 api-gateway/node_modules
 
 terraform/.terraform/
+terraform/terraform.tfvars
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/brain_drip.key
+
+braindrip-backend/.deploy.env
+braindrip-app/.deploy.env
+api-gateway/.deploy.env
 
 braindrip-frontend/.cache
