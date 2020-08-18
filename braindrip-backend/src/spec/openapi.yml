@@ -1,0 +1,100 @@
+openapi: '3.0.0'
+# modularized based off: https://github.com/OAI/OpenAPI-Specification/issues/1961
+info:
+  version: 1.0.0
+  title: Brain Drip
+  description: The official v2 Brain Drip API
+  termsOfService: http://swagger.io/terms/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: /v1
+paths:
+  /users:
+    $ref: './users/users.yml#/users'
+  /users/login:
+    $ref: './users/userLogin.yml#/userLogin'
+  /users/{id}:
+    $ref: './users/userById.yml#/userById'
+  /learning-path:
+    $ref: './learningpath/learningpath.yml#/learningPath'
+  /learning-path/user/{userId}:
+    $ref: './learningpath/learningpathbyuserid.yml#/learningPathByUserId'
+  /learning-path/id/{id}:
+    $ref: './learningpath/learningpathbyid.yml#/learningPathById'
+  /learning-path/search:
+    $ref: './learningpath/learningpathbyparams.yml#/learningPathByParams'
+  /learning-path/search/{searchString}:
+    $ref: './learningpath/learningpathbysearch.yml#/learningPathBySearch'
+  /learning-path/resource:
+    $ref: './learningpathresource/learningpathresource.yml#/learningPathResource'
+  /sessions:
+    $ref: './sessions/sessions.yml#/sessions'
+  /auth/google:
+    $ref: './auth/google.yml#/google'
+  /auth/facebook:
+    $ref: './auth/facebook.yml#/facebook'
+  /auth/google/callback:
+    $ref: './auth/googlecallback.yml#/googleCallback'
+  /auth/facebook/callback:
+    $ref: './auth/facebookcallback.yml#/facebookCallback'
+  /learning-bucket:
+    $ref: './learningbucket/learningbucket.yml#/learningBucket'
+  /learning-bucket/user/:
+    $ref: './learningbucket/learningbucketbyuserid.yml#/learningBucketByUserId'
+  /learning-bucket/id/{id}:
+    $ref: './learningbucket/learningbucketbyid.yml#/learningBucketById'
+  /learning-bucket/resource:
+    $ref: './learningbucketresource/learningbucketresource.yml#/learningBucketResource'
+  /downvotes:
+    $ref: './downvotes/downvotes.yml#/downvotes'
+  /favorites:
+    $ref: './favorites/favorites.yml#/favorites'
+  /upvotes:
+    $ref: './upvotes/upvotes.yml#/upvotes'
+  /learning-path/resource/id/{id}:
+    $ref: './learningpathresource/learningpathresourcebyid.yml#/learningPathResourceById'
+  /learning-bucket/resource/id/{id}:
+    $ref: './learningbucketresource/learningbucketresourcebyid.yml#/learningBucketResourceById'
+
+components:
+  schemas:
+    User:
+      required:
+        - id
+        - email
+        - password
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          format: password
+        # type:
+        # 	$ref: '#/components/schemas/PetType'
+
+    PetType:
+      type: string
+      enum:
+        - dog
+        - cat
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key

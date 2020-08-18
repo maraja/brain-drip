@@ -1,0 +1,66 @@
+users:
+    get:
+        description: |
+            Returns all users
+        operationId: getUsers
+        responses:
+            '200':
+                description: users response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/User'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+    post:
+        description: |
+            creates a new user
+        operationId: createUser
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: User to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/User'
+
+        responses:
+            '200':
+                description: users response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        User:
+            required:
+                # - id
+                - email
+                - password
+            properties:
+                id:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                    format: password
+                # type:
+                # 	$ref: '#/components/schemas/PetType'

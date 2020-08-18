@@ -1,0 +1,44 @@
+userLogin:
+    post:
+        description: |
+            logs in a user
+        operationId: userLogin
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: User to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/User'
+
+        responses:
+            '200':
+                description: users response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        User:
+            required:
+                # - id
+                - email
+                - password
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+                    format: password
+                # type:
+                # 	$ref: '#/components/schemas/PetType'

@@ -1,0 +1,175 @@
+learningBucket:
+    get:
+        description: |
+            Returns all learning buckets
+        operationId: getLearningBuckets
+        responses:
+            '200':
+                description: learning bucket response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/LearningBucket'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+    post:
+        description: |
+            creates a new learning bucket
+        operationId: createLearningBucket
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning bucket to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/LearningBucket'
+
+        responses:
+            '200':
+                description: learning bucket response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LearningBucket'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+    put:
+        description: |
+            updates a learning bucket
+        operationId: updateLearningBucket
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: updated learning bucket
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/PutLearningBucket'
+
+        responses:
+            '200':
+                description: learning bucket response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LearningBucket'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+    delete:
+        description: |
+            deletes a learning bucket
+        operationId: deleteLearningBucket
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning bucket to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/DeleteLearningBucket'
+
+        responses:
+            '200':
+                description: learning bucket deleted
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteLearningBucket'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningBucket:
+            required:
+                - name
+                - description
+                - tags
+                - userId
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                    description: name of this learning bucket.
+                description:
+                    type: string
+                    description: description of this learning bucket.
+                tags:
+                    type: string
+                    description: tags of this learning bucket.
+                userId:
+                    type: string
+                    description: id of user
+                user: 
+                    type: object
+                    description: object including user information
+                learningBucketResources:
+                    type: array
+                    description: array of learning buckets.
+        PutLearningBucket:
+            required:
+                - learningBucketId
+                - name
+                - description
+                - tags
+                - userId
+            properties:
+                learningBucketId:
+                    type: string
+                name:
+                    type: string
+                    description: name of this learning bucket.
+                description:
+                    type: string
+                    description: description of this learning bucket.
+                tags:
+                    type: string
+                    description: tags of this learning bucket.
+                userId:
+                    type: string
+                    description: id of user
+                user: 
+                    type: object
+                    description: object including user information
+                learningBucketResources:
+                    type: array
+                    description: array of learning buckets.
+        DeleteLearningBucket:
+            required:
+                - learningBucketId
+                - userId
+            properties:
+                id:
+                    type: string
+                learningBucketId:
+                    type: string
+                    description: Learning bucket id.
+                userId:
+                    type: string
+                    description: User id

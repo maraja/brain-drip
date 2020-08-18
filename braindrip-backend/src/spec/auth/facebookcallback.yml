@@ -1,0 +1,27 @@
+facebookCallback:
+    get:
+        description: |
+            facebook auth
+        operationId: facebookAuth
+        responses:
+            '200':
+                description: facebook response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/FacebookAuth'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        FacebookAuth:
+            properties:
+                message:
+                    type: string

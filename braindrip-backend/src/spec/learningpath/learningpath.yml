@@ -1,0 +1,192 @@
+learningPath:
+    get:
+        description: |
+            Returns all learning paths
+        operationId: getLearningPaths
+        responses:
+            '200':
+                description: learning path response
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: '#/components/schemas/LearningPath'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+    post:
+        description: |
+            creates a new learning path
+        operationId: createLearningPath
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning path to add
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/LearningPath'
+
+        responses:
+            '200':
+                description: learning path response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LearningPath'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+    put:
+        description: |
+            updates a learning path
+        operationId: updateLearningPath
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: updated learning path
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/PutLearningPath'
+
+        responses:
+            '200':
+                description: learning path response
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LearningPath'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+    
+    delete:
+        description: |
+            deletes a learning path
+        operationId: deleteLearningPath
+        # security:
+        #     - ApiKeyAuth: []
+        requestBody:
+            description: learning path to delete
+            required: true
+            content:
+                application/json:
+                    schema: 
+                        $ref: '#/components/schemas/DeleteLearningPath'
+
+        responses:
+            '200':
+                description: learning path deleted
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteLearningPath'
+            default:
+                description: unexpected error
+                content:
+                    application/json:
+                        schema:
+                            $ref: '../openapi.yml#/components/schemas/Error'
+
+components:
+    schemas:
+        LearningPath:
+            required:
+                # - id
+                - name
+                - description
+                - difficulty
+                # - upVotes
+                # - downVotes
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                    description: name of this learning path.
+                description:
+                    type: string
+                    description: description of this learning path.
+                difficulty:
+                    type: string
+                    description: level of difficulty for this learning path.
+                upVotes:
+                    type: integer
+                    description: number of upvotes.
+                downVotes:
+                    type: integer
+                    description: number of downvotes.
+                userId:
+                    type: string
+                    description: id of user
+                user: 
+                    type: object
+                    description: object including user information
+                learningPathResources:
+                    type: array
+                    description: array of learning paths.
+        PutLearningPath:
+            required:
+                - learningPathId
+                - name
+                - description
+                - difficulty
+                - upVotes
+                - downVotes
+            properties:
+                learningPathId:
+                    type: string
+                name:
+                    type: string
+                    description: name of this learning path.
+                description:
+                    type: string
+                    description: description of this learning path.
+                difficulty:
+                    type: string
+                    description: level of difficulty for this learning path.
+                upVotes:
+                    type: integer
+                    description: number of upvotes.
+                downVotes:
+                    type: integer
+                    description: number of downvotes.
+                userId:
+                    type: string
+                    description: id of user
+                user: 
+                    type: object
+                    description: object including user information
+                learningPathResources:
+                    type: array
+                    description: array of learning paths.
+                # type:
+                # 	$ref: '#/components/schemas/PetType'
+        DeleteLearningPath:
+            required:
+                - learningPathId
+                - userId
+            properties:
+                id:
+                    type: string
+                learningPathId:
+                    type: string
+                    description: Learning path id.
+                userId:
+                    type: string
+                    description: User id
