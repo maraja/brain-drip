@@ -46,7 +46,6 @@ export default class BrainDripService {
                 'Authorization': auth
             }
         }).json();
-        console.log(body);
         return body.learningPaths;
     }
 
