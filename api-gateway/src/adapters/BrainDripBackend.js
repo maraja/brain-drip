@@ -40,12 +40,13 @@ export default class BrainDripService {
         return body.learningPaths;
     }
 
-    static async fetchLearningPathsByUser({ userId, auth }) {
-        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/${userId}`, {
+    static async fetchLearningPathsByUser({ auth }) {
+        const body = await got.get(`${BRAINDRIP_BACKEND_URI}/learning-path/user/`, {
             headers: {
                 'Authorization': auth
             }
         }).json();
+        console.log(body);
         return body.learningPaths;
     }
 

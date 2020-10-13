@@ -48,6 +48,8 @@ module.exports = function(sequelize, DataTypes) {
   LearningPath.associate = function(models) {
     this.hasMany(models.LearningPathResource, { as: 'learningPathResources' });
     this.hasMany(models.Favorites, { as: 'favorites' });
+    this.hasMany(models.Downvotes, { as: 'downvotes' });
+    this.hasMany(models.Upvotes, { as: 'upvotes' });
     this.belongsTo(models.User, {
         foreignKey: 'userId',
         as: 'user'

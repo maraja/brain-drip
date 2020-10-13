@@ -24,11 +24,9 @@ const LearningPathDetails = (props) => {
   if (loading) return <Paragraph>Loading ...</Paragraph>;
   if (data)
     return (
-      <Layout>
         <Container>
           <LearningPathLarge learningPath={data.learningPath} />
         </Container>
-      </Layout>
     );
 };
 export default LearningPathDetails;

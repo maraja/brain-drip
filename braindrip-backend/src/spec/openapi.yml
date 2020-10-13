@@ -19,7 +19,7 @@ paths:
     $ref: './users/userById.yml#/userById'
   /learning-path:
     $ref: './learningpath/learningpath.yml#/learningPath'
-  /learning-path/user/{userId}:
+  /learning-path/user/:
     $ref: './learningpath/learningpathbyuserid.yml#/learningPathByUserId'
   /learning-path/id/{id}:
     $ref: './learningpath/learningpathbyid.yml#/learningPathById'

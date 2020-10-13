@@ -103,7 +103,6 @@ const LearningPathCreate = ({ }) => {
   }, [newLearningPath, learningPathError])
 
   return (
-    <Layout>
     <Container>
       <Title level={3}>Create a new Learning Path</Title>
       <Form
@@ -167,7 +166,6 @@ const LearningPathCreate = ({ }) => {
         </Form.Item>
       </Form>
     </Container>
-    </Layout>
   )
 }
 

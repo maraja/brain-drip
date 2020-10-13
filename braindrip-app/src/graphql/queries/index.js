@@ -28,21 +28,22 @@ export const GET_LEARNING_PATHS_ALL = gql`
       id
       name
       description
-      difficulty
+      difficulty,
+      upVotes,
+      downVotes
     }
   }
 `;
 
 export const GET_LEARNING_PATHS_BY_USER = gql`
-  query userLearningPaths($userId: String!){
-    userLearningPaths(userId: $userId) {
+  query userLearningPaths{
+    userLearningPaths {
       id
       name
       description
       difficulty
       upVotes
       downVotes
-      userId
       tags {
         name
       }

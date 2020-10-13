@@ -3,13 +3,6 @@ learningPathByUserId:
         description: |
             Get learning by id
         operationId: getLearningPathByUserId
-        parameters:
-            -   name: userId
-                in: path
-                description: id of user to get learning paths for 
-                required: true
-                schema:
-                    type: string
         responses:
             '200':
                 description: learning path response

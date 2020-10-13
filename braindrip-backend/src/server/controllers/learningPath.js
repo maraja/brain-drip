@@ -183,7 +183,11 @@ const getLearningPathsByUserId = async (req, res, next) => {
 
 const getLearningPaths = async (req, res, next) => {
     try {
-        const learningPaths = await LearningPath.findAll();
+        const learningPaths = await LearningPath.findAll({
+            order: [
+                ['updatedAt', 'DESC']
+            ]
+        });
 
         if (!learningPaths) return next(new Error("No learning paths found"))
 

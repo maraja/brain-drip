@@ -8,7 +8,7 @@ export const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
     credentials: "include",
-    uri: process.env.BRAINDRIP_URI + '/graphql'
+    uri: 'http://localhost:7000'+ '/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
